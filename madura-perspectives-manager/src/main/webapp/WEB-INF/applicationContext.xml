@@ -85,7 +85,7 @@ limitations under the License.
  	This bundle manager configuration is suitable for demos. It locates a fixed set of bundles from a directory in the war file (WEB-INF/bundles)
 	Useful for demos but not for production because you cannot dynamically update the bundles.
  -->	
-	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerImpl"/>	
+	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb"/>	
 
 
 </beans>
