@@ -1,0 +1,197 @@
+<?xml-stylesheet type="text/xsl" href="MaduraHTML.xsl" ?>
+<doc xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://oss.sonatype.org/content/repositories/releases/nz/co/senanque/maduradocs/6.1.0/maduradocs-6.1.0.xsd">
+	<title>
+		<MainTitle>Madura Perspectives Manager</MainTitle>
+		<SubTitle>User Guide</SubTitle>
+		<Author>Roger Parkinson</Author>
+		<Revision>$Revision: 1$</Revision>
+		<image>logo.jpg</image>
+		<references>
+			<reference t="MaduraObjects" url="www.madurasoftware.com/home/madura-objects"/>
+			<reference t="MaduraRules" url="www.madurasoftware.com/home/madura-rules"/>
+			<reference t="MaduraVaadinSupport" url="https://github.com/RogerParkinson/MaduraVaadinSupport"/>
+			<reference t="MaduraBundles" url="https://github.com/RogerParkinson/MaduraBundle"/>
+			<reference t="MaduraPizzaOrderBundle" url="https://github.com/RogerParkinson/MaduraPizzaOrderBundle"/>
+			<reference t="MaduraDemoBundle1" url="https://github.com/RogerParkinson/MaduraDemoBundle1"/>
+			<reference t="MaduraDemoBundle2" url="https://github.com/RogerParkinson/MaduraDemoBundle2"/>
+			<reference t="Vaadin" url="http://vaadin.com/home" />
+			<reference t="Spring Framework" url="http://www.springframework.org" />
+			<reference t="Spring-Security" url="http://static.springframework.org/spring-security/site/"/>			
+			<reference t="MaduraPerspectivesManager" url="https://github.com/RogerParkinson/MaduraPerspectivesManager"/>
+			<reference t="LogbackConfiguration" url="http://logback.qos.ch/manual/contextSelector.html"/>
+		</references>
+	</title>
+	<body>
+		<process-log/>
+		<process-references/>
+		<h1 t="What is this?">
+		<p>I'll start with an example. Say you need an intranet application which presents your staff with various functions they need to do.</p>
+		<p>These functions might be:</p>
+		<list>
+		<le>Recording and updating trouble tickets</le>
+		<le>Entering their time sheets</le>
+		<le>Looking at the current newsletter</le>
+		<le>Viewing your product catalogue</le>
+		<le>Maintaining customer details</le>
+		</list>
+		<p>We call these separate functions <emph>perspectives</emph>. They are sub-applications that are plugged into the main application, the manager. 
+		They can contribute various UI elements such as menu items and buttons. The manager decides which perspective's components should be visible
+		at any time. This means the user can flick between various perspective-based applications while remaining in the same
+		main (manager) application.</p>
+		<p>This has the following advantages over deploying the applications separately:</p>
+		<list>
+		<le>Packaging the application as a Madura Bundle<referenceLink t="MaduraBundles"/> is simpler than packaging it as a web application.</le>
+		<le>The manager handles common functions such as login, bypassing the login if this has already been handled. The perspectives
+		only need to assume they are already logged in.</le>
+		<le>A blackboard system allows the different applications to communicate with each other if necessary, though they
+		do most, or all, of their operations in isolation.</le>
+		<le>New perspective applications can be added or removed dynamically to the manager without restarting the application
+		environment. In flight updates of the perspective applications is supported. New logins
+		see the newly added applications, otherwise the list of applications remains stable.</le>
+		<le>Because there is only one CSS definition across all the application there is automatically a consistency in the look
+		of all the perspectives.</le>
+		</list>
+		<p>The Manager uses Vaadin and the perspective applications must use Vaadin to deliver their UI. There is no restriction on
+		what parts of Vaadin the perspective applications can use.</p>
+		<p>The full documentation for this is in <referenceLink t="MaduraVaadinSupport"/></p>
+		</h1>
+        <h1 t="Running the Demo">
+		<p>The first thing you need to do is check out the project. See <referenceLink t="MaduraPerspectivesManager"/> for details.</p>
+		<p>This is a maven project with a default goal so make sure you have maven (v2) installed, type <courier>mvn</courier> and the war file
+		will be built. You should be running Java 7 or later.</p>
+		<p>You will need an application server. We tested this with Tomcat V7, but any application server you are comfortable with
+		should be just fine. It also runs on VMWare's cloud server, and probably most others.</p>
+		<p>For the purposes of keeping the demo setup simple the bundles it uses are embedded in the war file, that means you don't have
+		to mess about building the bundles and copying them around. But the configuration to support the more flexible use is in the
+		<courier>applicationContext.xml</courier> file, commented out, near the bottom. We will look at those options in <sectionLink t="Configuring for Production"/></p>
+		<!-- 
+        <p>Before you go to the bother of building this you can take a look at it running in the cloud here<referenceLink t="madura-perspectives-manager-cloud"/>, but
+        do understand that in this demo the pluggable applications are fixed and you cannot switch them in and out and add your own. When you build it yourself you can
+        do all of that.</p>
+         -->
+        <p>To run the demo the user/password is admin/admin.</p>
+		<img width="15cm" href="images/MaduraPerspectiveDemo.png">Madura Perspective Demo</img>
+		<p>What <figureLink t="Madura Perspective Demo"/> shows is the initial display when a user logs into the main application.</p>
+		<p>Worth noticing at this point is that there is not much there, but there is a list of sub applications on the left hand side. There
+		is also a small menu and, over on the right, the 'Logged in as: admin' indicates who logged in.</p>
+		<p>So this is what the main application's UI looks like, but this is just a demo. The details of this UI can be customised to
+		any requirements. For example if you want the list of sub-applications to appear somewhere else, perhaps over on the right, 
+		and as a drop down list you just change the code in the main layout. You probably do not want the Madura logo dominating the
+		upper left hand side either, though you're welcome to put it there. Also you can adjust the CSS definitions that Vaadin uses
+		to change colours and fonts etc. Vaadin themes are, of course, supported so you can select different themes for different users
+		if you want. The selected theme is propagated to the sub-applications as well, ensuring the user has a consistent interface.</p>
+		<p>If the user selects the <courier>User</courier> option this loads the sub-application and changes the screen.</p>
+		<img width="15cm" href="images/UserDetails.png">User Details</img>
+		<p>The User Details sub application is a very simple pure Vaadin form mapped to an object. It accepts information about a user
+		but it does nothing much with it (this is only a demo). But it shows where the sub application UI appears on the screen. Notice
+		that it retains the same theme as the main application. Notice the the title on the upper right has changed, it shows the name of the
+		current sub application. If we now click the <courier>pizza</courier> option we see the 
+		<courier>Pizza Order</courier> UI.</p>
+		<img width="15cm" href="images/PizzaOrder.png">Pizza Order</img>
+		<p>This sub application uses Madura Objects and Madura Rules to drive the UI, so is a bit more interesting. It uses the same
+		objects and rules as the pizza order demo. The point, though, is that this kind of functionality can be added to a sub application
+		when we want. You might also notice that the menu has an extra entry. This was contributed by the Pizza Order sub application. Menu
+		items appear and disappear as different sub applications are selected.</p>
+		<p>Now let's take a look at what these sub applications really are.</p>
+		<p>Each sub application is a Madura Bundle, which means it is a jar file with some extra bits, including a local Spring beans file.
+		Each sub application contributes:</p>
+		<list>
+		<le>A name. This is used to create the link on the left.</le>
+		<le>A description. This is what you see displayed on the upper right. It is also used to make a tooltip on the link.</le>
+		<le>A UI, which is the bulk of the application.</le>
+		</list>
+		<p>The sub applications can be added to the main application dynamically. Once a user has established a session, ie logged in, then
+		they will not see the list of applications change, but they will get the latest list of available applications. This means you can
+		dynamically add sub applications to the main application while it is still running. You can add new versions of an existing
+		sub application in the same way. All you need to do is copy the jar file to the directory Madura Bundles is monitoring.</p>
+		<p>The applications use the same theme information as the main application, so a change of theme will automatically propagate to
+		the sub applications.</p>
+		<p>Security information, specifically permissions established at login time, is also available across all sub applications.</p>
+		<p>And the sub applications can influence each other through a blackboard.</p>
+		<p>The blackboard is a publish-and-subscribe system where one application publishes something to the blackboard and other applications
+		can react to the change or ignore it.</p>
+        </h1>
+        <h1 t="Configuring for Production">
+        <p>A production configuration would dispense with the bundles embedded in the war file and use an external directory. To configure this you need
+        to tell your application server where that directory is.</p>
+		<code><![CDATA[
+<jee:jndi-lookup id="bundlesDir" jndi-name="java:/comp/env/BundlesDir" expected-type="java.lang.String" />
+<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerImpl">
+	<property name="directory" ref="bundlesDir"/>
+	<property name="time" value="10000"/>
+</bean>
+		]]></code>
+        <p>You will find the above configuration in <courier>applicationContext.xml</courier> just above the bundleManager that is used by default, which you
+        should remove, of course, because you only want one of them.
+        The only difference between the two is that this one has the directory and time properties set. Just above it a JNDI name is defined. Now, you
+        could simply hard code your directory in there and dispense with the JNDI name but in a production system you probably want to use JNDI so that you
+        can change it without having to rebuild the application.</p>
+        <p>Also uncomment the last env-entry in the web.xml file.</p>
+        <p>The next step is to tell your application server what value to give that JNDI name. This depends on your application server. For Tomcat you
+        can just edit it into your <courier>context.xml</courier> file like this:</p>
+		<code><![CDATA[
+<Environment name="BundlesDir" value="MY_DIRECTORY/bundles" type="java.lang.String" override="true"/>
+		]]></code>
+        <p>Finally you want to actually add some bundles to that directory. There are three bundle projects you can use right away, these are the
+        ones in the demo:</p>
+        <list>
+        <le>madura-pizzaorder-bundle<referenceLink t="MaduraPizzaOrderBundle"/></le>
+        <le>madura-demo-bundle1<referenceLink t="MaduraDemoBundle1"/></le>
+        <le>madura-demo-bundle2<referenceLink t="MaduraDemoBundle2"/></le>
+        </list>
+        <p>These are all maven projects. Just build them and copy the resulting jar files to your bundles directory. But you will want to change their
+        versions to later ones <emph>or</emph> delete the bundles in the <courier>WEB-INF/bundles</courier> directory and rebuild the main application. 
+        Otherwise the main application will load the internal bundles and see the external ones as duplicates to be ignored.</p>
+        <p>As long as you keep changing the version you can change, build and deploy those bundles without restarting the main application, though you do
+        have to log out and back in to see the new bundle you added.</p> 
+        </h1>
+		<a1 t="License">
+			<p>The code specific to MaduraPerspectivesManager is licensed under the Apache License 2.0 <referenceLink t="Apache Licence 2.0"/>.</p>
+			<p>The dependent products have compatible licenses specified in their pom files. Madura Rules (optional) has a dual
+			license to cover projects that do not qualify for the Apache License.</p>
+		</a1>
+		<a1 t="Release Notes">
+		<table width="12cm">
+			<tw>12cm</tw>
+		<tr>
+			<td>2.3</td>
+		</tr>
+		<tr>
+			<td>Added internal bundles.</td>
+		</tr>
+		<tr>
+			<td>Added mechanism to specify the bundles dir in JNDI.</td>
+		</tr>
+		<tr>
+			<td>Fixed some I18n issues.</td>
+		</tr>
+		<tr>
+			<td>Switched to maven build.</td>
+		</tr>
+		<tr>
+			<td>2.2</td>
+		</tr>
+		<tr>
+			<td>Built for Java 1.7.</td>
+		</tr>
+        <tr>
+            <td>2.1</td>
+        </tr>
+        <tr>
+            <td>Updated for later Vaadin additions</td>
+        </tr>
+        <tr>
+            <td>2.0</td>
+        </tr>
+        <tr>
+            <td>Modifications to allow demo in Cloud Foundry</td>
+        </tr>
+		<tr>
+			<td>Initial release</td>
+		</tr>
+		</table>
+		</a1>
+	</body>
+	
+</doc>
