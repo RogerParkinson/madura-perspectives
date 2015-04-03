@@ -79,18 +79,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>nz.co.senanque</groupId>
-				<artifactId>maduradocs</artifactId>
-				<version>6.1.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>pdf</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.4.1</version>
 			</plugin>

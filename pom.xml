@@ -19,7 +19,7 @@
 		<gwt.version>2.6.1</gwt.version>
 		<jaxb22.version>2.2.4-1</jaxb22.version>
 		<logback.version>1.0.1</logback.version>
-		<madura.vaadin.support.version>2.5.1</madura.vaadin.support.version>
+		<madura.vaadin.support.version>2.5.4-SNAPSHOT</madura.vaadin.support.version>
 		<madura.rules.version>2.2.4-SNAPSHOT</madura.rules.version>
 		<madura.rules.maven.plugin.version>1.2.0</madura.rules.maven.plugin.version>
 		<madura.objects.version>2.2.3</madura.objects.version>
