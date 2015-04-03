@@ -94,7 +94,7 @@ public class MainLayout extends CustomComponent implements InitializingBean,View
 	private Blackboard m_blackboard = new Blackboard();
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-	private MessageSourceAccessor m_messageSourceAccessor;
+	private transient MessageSourceAccessor m_messageSourceAccessor;
 	private ViewManager m_viewManager;
 
 	/**

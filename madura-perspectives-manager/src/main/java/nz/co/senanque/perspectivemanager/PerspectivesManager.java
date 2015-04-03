@@ -37,7 +37,7 @@ import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 public class PerspectivesManager extends Application implements HttpServletRequestListener, MessageSourceAware {
 
 	protected transient Logger log = LoggerFactory.getLogger(this.getClass());
-	private MessageSourceAccessor m_messageSourceAccessor;
+	private transient MessageSourceAccessor m_messageSourceAccessor;
 	@Autowired(required=false) private Preauthenticator m_preauthenticator;
     private boolean m_preauthenticated;
     @Autowired private ViewManager m_viewManager;
