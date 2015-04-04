@@ -110,9 +110,9 @@
 				              <Built-By>${user.name}</Built-By>
 				              <Bundle-Activator>nz.co.senanque.madura.bundle.BundleRootImpl</Bundle-Activator>
 				              <Bundle-Description>second</Bundle-Description>
-				              <Bundle-Name>App2</Bundle-Name>
+				              <Bundle-Name>Name</Bundle-Name>
 				              <Bundle-Version>${project.version}</Bundle-Version>
-				              <Bundle-Context>app2-spring.xml</Bundle-Context>
+				              <Bundle-Context>name-spring.xml</Bundle-Context>
 				            </manifestEntries>
 				          </archive>
 		            </configuration>

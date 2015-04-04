@@ -113,9 +113,9 @@
 				              <Built-By>${user.name}</Built-By>
 				              <Bundle-Activator>nz.co.senanque.madura.bundle.BundleRootImpl</Bundle-Activator>
 				              <Bundle-Description>user.details</Bundle-Description>
-				              <Bundle-Name>User</Bundle-Name>
+				              <Bundle-Name>NameAddress</Bundle-Name>
 				              <Bundle-Version>${project.version}</Bundle-Version>
-				              <Bundle-Context>user-spring.xml</Bundle-Context>
+				              <Bundle-Context>nameaddress-spring.xml</Bundle-Context>
 				            </manifestEntries>
 				          </archive>
 		            </configuration>
