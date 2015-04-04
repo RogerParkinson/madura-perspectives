@@ -154,6 +154,10 @@ public class MainLayout extends CustomComponent implements InitializingBean,View
 			private static final long serialVersionUID = -1805734819451947967L;
 
 			public void menuSelected(MenuItem selectedItem) {
+				for (SubApplication subApplication: getBundleListenerImpl().getSubApplicationValues())
+				{
+					subApplication.getBundleVersion().decrement();
+				}
 				getViewManager().logout();
 				
 			}});
@@ -180,6 +184,7 @@ public class MainLayout extends CustomComponent implements InitializingBean,View
 	
 	private void setupSubApplication(final SubApplication subApplication)
 	{
+		subApplication.getBundleVersion().increment();
 		Button b = new Button(subApplication.getCaption());
         b.setDescription(subApplication.getDescription());
         Resource icon = subApplication.getIcon();
