@@ -5,13 +5,35 @@ Provides a web based framework for sub-applications to plug into. The framework 
 
 Sub-applications can be added dynamically while the application is running. They can contribute entries to the main menu which appear dynamically when that sub-application is active.
 
-The framework s easily customisable using Vaadin's facilities (stylesheets etc).
+The framework s easily customisable using Vaadin's facilities (CSS etc). The CSS definitions are, of course, shared across
+all of the sub-applications so you get a consistent look and feel.
 
 Build this using maven clean package. You will find the following sub projects:
 
-<ul>
-<le>madura-prespectives-manager. This one builds a war file suitable for deploying in a JEE server. It has been tested under Tomcat 7 and should run fine with Eclipse WTP.</le>
-<le>madura-perspectives-name is a bundled sub-application which plugs into the perspectives manager.</le>
-<le>madura-perspectives-name-address. Another bundled sub-application.</le>
-<le>madura-perspectives-pizzaorder. Another bundled sub-application. This one is more complex,</le>
-</ul> 
+# Building
+
+Just run mvn in the top level directory.
+
+# Subprojects
+
+## madura-perspectives-manager
+
+This is the core project and it delivers a war file that can accept sub-applications. The default is to add them to the WEB-INF/bundles directory, which at first glance makes the whole dynamic sub-applications seem a bit pointless since they are embedded in the war file. But this is a good way to set up a demo because it saves you having to configure it. See the docs for details on configuration, but you don't need to configure it to see the demo. The docs are in the pdf file in the target directory (after you've run the build.
+
+We have tested the war file under Tomcat 7 but it should run on any JEE server.
+
+Because it is a demo we have avoided the need to a database etc.
+
+## madura-perspectives-name
+
+This is the simplest of the sub-applications. It puts a single field on the screen. It also puts the field onto the blackboard.
+
+## madura-perspectives-nameaddress
+
+This slightly more complex in that it adds address information, as well as adding an entry to the main menu.
+
+## madura-perspectives-pizzaorder
+
+This is much more complex in that it implements the [Pizza Order Demo](https://github.com/RogerParkinson/MaduraPizzaOrderDemo). This is a rules-driven pizza configuration which lets you pick different pizza bases, toppings and sizes, except that only some combinations are allowed and the rules enforce this. The rules, UI and underlying domain objects are all delivered by the sub-application.
+
+It also contributes two entries to the main menu.
