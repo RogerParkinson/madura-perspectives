@@ -28,13 +28,13 @@ communicate with each other.</description>
 		</developer>
 	</developers>
 	<scm>
-		<url>https://github.com/RogerParkinson/MaduraPerspectivesManager/</url>
-		<connection>scm:git:ssh://git@github.com:RogerParkinson/MaduraPerspectivesManager.git</connection>
-		<developerConnection>scm:git:https://github.com/RogerParkinson/MaduraPerspectivesManager.git</developerConnection>
+		<url>https://github.com/RogerParkinson/madura-perspectives/</url>
+		<connection>scm:git:ssh://git@github.com:RogerParkinson/madura-perspectives.git</connection>
+		<developerConnection>scm:git:https://github.com/RogerParkinson/madura-perspectives.git</developerConnection>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/RogerParkinson/MaduraPerspectivesManager/issues</url>
+		<url>https://github.com/RogerParkinson/madura-perspectives/issues</url>
 	</issueManagement>
 
 	<dependencies>

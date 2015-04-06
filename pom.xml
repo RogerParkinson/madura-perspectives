@@ -22,7 +22,7 @@
 		<madura.vaadin.support.version>2.5.4-SNAPSHOT</madura.vaadin.support.version>
 		<madura.rules.version>2.2.4-SNAPSHOT</madura.rules.version>
 		<madura.rules.maven.plugin.version>1.2.0</madura.rules.maven.plugin.version>
-		<madura.objects.version>2.2.3</madura.objects.version>
+		<madura.objects.version>2.2.4</madura.objects.version>
 		<hyperjaxb.version>0.5.6</hyperjaxb.version>
 		<slf4j.version>1.7.5</slf4j.version>
 	</properties>

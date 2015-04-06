@@ -109,12 +109,13 @@
 				            <manifestEntries>
 				              <Built-By>${user.name}</Built-By>
 				              <Bundle-Activator>nz.co.senanque.madura.bundle.BundleRootImpl</Bundle-Activator>
-				              <Bundle-Description>second</Bundle-Description>
+				              <Bundle-Description>Name Field</Bundle-Description>
 				              <Bundle-Name>Name</Bundle-Name>
 				              <Bundle-Version>${project.version}</Bundle-Version>
 				              <Bundle-Context>name-spring.xml</Bundle-Context>
 				            </manifestEntries>
 				          </archive>
+						<outputDirectory>../madura-perspectives-manager/src/main/webapp/WEB-INF/bundles/</outputDirectory>
 		            </configuration>
 		          </execution>
 		        </executions>

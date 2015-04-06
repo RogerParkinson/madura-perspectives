@@ -118,6 +118,7 @@
 				              <Bundle-Context>nameaddress-spring.xml</Bundle-Context>
 				            </manifestEntries>
 				          </archive>
+						<outputDirectory>../madura-perspectives-manager/src/main/webapp/WEB-INF/bundles/</outputDirectory>
 		            </configuration>
 		          </execution>
 		        </executions>

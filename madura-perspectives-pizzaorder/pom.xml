@@ -7,7 +7,7 @@
   </parent>
   <artifactId>madura-perspectives-pizzaorder</artifactId>
 	<url>www.madurasoftware.com</url>
-	<description>This is the pizza order demo application packaged as a bundle, which is a jar file that can be dynamically plugged into the Madura Perspectives Manager.</description>
+	<description>This is a rules-driven pizza configuration which lets you pick different pizza bases, toppings and sizes, except that only some combinations are allowed and the rules enforce this. The rules, UI and underlying domain objects are all delivered by this sub-application.</description>
 	<organization>
 		<name>Prometheus Consulting</name>
 		<url>www.madurasoftware.com</url>
@@ -263,6 +263,7 @@
 									<Bundle-Context>bundle-spring.xml</Bundle-Context>
 								</manifestEntries>
 							</archive>
+							<outputDirectory>../madura-perspectives-manager/src/main/webapp/WEB-INF/bundles/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
