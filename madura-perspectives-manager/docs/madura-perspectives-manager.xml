@@ -11,14 +11,11 @@
 			<reference t="MaduraObjects" url="www.madurasoftware.com/home/madura-objects"/>
 			<reference t="MaduraRules" url="www.madurasoftware.com/home/madura-rules"/>
 			<reference t="MaduraVaadinSupport" url="https://github.com/RogerParkinson/MaduraVaadinSupport"/>
-			<reference t="MaduraBundles" url="https://github.com/RogerParkinson/MaduraBundle"/>
-			<reference t="MaduraPizzaOrderBundle" url="https://github.com/RogerParkinson/MaduraPizzaOrderBundle"/>
-			<reference t="MaduraDemoBundle1" url="https://github.com/RogerParkinson/MaduraDemoBundle1"/>
-			<reference t="MaduraDemoBundle2" url="https://github.com/RogerParkinson/MaduraDemoBundle2"/>
+			<reference t="MaduraBundles" url="https://github.com/RogerParkinson/madura-bundles"/>
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
 			<reference t="Spring-Security" url="http://static.springframework.org/spring-security/site/"/>			
-			<reference t="MaduraPerspectivesManager" url="https://github.com/RogerParkinson/MaduraPerspectivesManager"/>
+			<reference t="madura-perspectives" url="https://github.com/RogerParkinson/madura-perspectives"/>
 			<reference t="LogbackConfiguration" url="http://logback.qos.ch/manual/contextSelector.html"/>
 		</references>
 	</title>
@@ -57,13 +54,13 @@
 		<p>The full documentation for this is in <referenceLink t="MaduraVaadinSupport"/></p>
 		</h1>
         <h1 t="Running the Demo">
-		<p>The first thing you need to do is check out the project. See <referenceLink t="MaduraPerspectivesManager"/> for details.</p>
+		<p>The first thing you need to do is check out the project. See the Readme.md file in <referenceLink t="madura-perspectives"/> for details.</p>
 		<p>This is a maven project with a default goal so make sure you have maven (v2) installed, type <courier>mvn</courier> and the war file
 		will be built. You should be running Java 7 or later.</p>
 		<p>You will need an application server. We tested this with Tomcat V7, but any application server you are comfortable with
 		should be just fine. It also runs on VMWare's cloud server, and probably most others.</p>
 		<p>For the purposes of keeping the demo setup simple the bundles it uses are embedded in the war file, that means you don't have
-		to mess about building the bundles and copying them around. But the configuration to support the more flexible use is in the
+		to mess about telling your application server what directory to sweep to find them. The configuration to support the more flexible use is in the
 		<courier>applicationContext.xml</courier> file, commented out, near the bottom. We will look at those options in <sectionLink t="Configuring for Production"/></p>
 		<!-- 
         <p>Before you go to the bother of building this you can take a look at it running in the cloud here<referenceLink t="madura-perspectives-manager-cloud"/>, but
@@ -136,24 +133,34 @@
         <p>Finally you want to actually add some bundles to that directory. There are three bundle projects you can use right away, these are the
         ones in the demo:</p>
         <list>
-        <le>madura-pizzaorder-bundle<referenceLink t="MaduraPizzaOrderBundle"/></le>
-        <le>madura-demo-bundle1<referenceLink t="MaduraDemoBundle1"/></le>
-        <le>madura-demo-bundle2<referenceLink t="MaduraDemoBundle2"/></le>
+        <le>madura-pizzaorder-bundle</le>
+        <le>madura-demo-bundle1</le>
+        <le>madura-demo-bundle2</le>
         </list>
-        <p>These are all maven projects. Just build them and copy the resulting jar files to your bundles directory. But you will want to change their
-        versions to later ones <emph>or</emph> delete the bundles in the <courier>WEB-INF/bundles</courier> directory and rebuild the main application. 
-        Otherwise the main application will load the internal bundles and see the external ones as duplicates to be ignored.</p>
-        <p>As long as you keep changing the version you can change, build and deploy those bundles without restarting the main application, though you do
-        have to log out and back in to see the new bundle you added.</p> 
+        <p>These are all maven sub-projects and they are automatically added to the <courier>WEB-INF/bundles</courier> in the madura-perspectives-manager project. You
+        can configure a sweep directory as described above and deploy your own bundle(s) to that. As long as you keep changing your bundle's version you can change, build 
+        and deploy it without restarting the main application, though you do have to log out and back in to see the new bundle you added.</p> 
         </h1>
 		<a1 t="License">
-			<p>The code specific to MaduraPerspectivesManager is licensed under the Apache License 2.0 <referenceLink t="Apache Licence 2.0"/>.</p>
+			<p>The code specific to madura-perspectives is licensed under the Apache License 2.0 <referenceLink t="Apache Licence 2.0"/>.</p>
 			<p>The dependent products have compatible licenses specified in their pom files. Madura Rules (optional) has a dual
 			license to cover projects that do not qualify for the Apache License.</p>
 		</a1>
 		<a1 t="Release Notes">
 		<table width="12cm">
 			<tw>12cm</tw>
+		<tr>
+			<td>2.3.1</td>
+		</tr>
+		<tr>
+			<td>Restructured the layout to include parent and sub-projects.</td>
+		</tr>
+		<tr>
+			<td>Added demo script link to menu.</td>
+		</tr>
+		<tr>
+			<td>Revised documentation.</td>
+		</tr>
 		<tr>
 			<td>2.3</td>
 		</tr>
