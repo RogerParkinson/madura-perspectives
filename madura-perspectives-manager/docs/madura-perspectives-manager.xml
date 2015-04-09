@@ -32,7 +32,7 @@
 		<le>Viewing your product catalogue</le>
 		<le>Maintaining customer details</le>
 		</list>
-		<p>We call these separate functions <emph>perspectives</emph>. They are sub-applications that are plugged into the main application, the manager. 
+		<p>We call these separate functions <emph>perspectives</emph>. They are delivered by sub-applications that are plugged into the main application, the manager. 
 		They can contribute various UI elements such as menu items and buttons. The manager decides which perspective's components should be visible
 		at any time. This means the user can flick between various perspective-based applications while remaining in the same
 		main (manager) application.</p>
@@ -49,9 +49,9 @@
 		<le>Because there is only one CSS definition across all the application there is automatically a consistency in the look
 		of all the perspectives.</le>
 		</list>
-		<p>The Manager uses Vaadin and the perspective applications must use Vaadin to deliver their UI. There is no restriction on
+		<p>The Manager uses Vaadin<referenceLink t="Vaadin"/> and the perspective applications must use Vaadin to deliver their UI. There is no restriction on
 		what parts of Vaadin the perspective applications can use.</p>
-		<p>The full documentation for this is in <referenceLink t="MaduraVaadinSupport"/></p>
+		<p>There is more documentation about using Vaadin in this way in <referenceLink t="MaduraVaadinSupport"/></p>
 		</h1>
         <h1 t="Running the Demo">
 		<p>The first thing you need to do is check out the project. See the Readme.md file in <referenceLink t="madura-perspectives"/> for details.</p>

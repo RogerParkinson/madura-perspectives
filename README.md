@@ -8,17 +8,15 @@ Sub-applications can be added dynamically while the application is running. They
 The framework s easily customisable using Vaadin's facilities (CSS etc). The CSS definitions are, of course, shared across
 all of the sub-applications so you get a consistent look and feel.
 
+If you want to try this out quickly there is an [on line demo](http://perspectivesmanager-madura.rhcloud.com/)
+
 Build this using maven clean package. You will find the following sub projects:
-
-# Building
-
-Just run mvn in the top level directory.
 
 # Subprojects
 
 ## madura-perspectives-manager
 
-This is the core project and it delivers a war file that can accept sub-applications. The default is to add them to the WEB-INF/bundles directory, which at first glance makes the whole dynamic sub-applications seem a bit pointless since they are embedded in the war file. But this is a good way to set up a demo because it saves you having to configure it. See the docs for details on configuration, but you don't need to configure it to see the demo. The docs are in the pdf file in the target directory (after you've run the build.
+This is the core project and it delivers a war file that can accept sub-applications. The default is to add them to the WEB-INF/bundles directory, which at first glance makes the whole dynamic sub-applications seem a bit pointless since they are embedded in the war file. But this is a good way to set up a demo because it saves you having to configure it. See the docs for details on configuration, but you don't need to configure it to see the demo. The docs are in the pdf file in the target directory (after you've run the build).
 
 We have tested the war file under Tomcat 7 but it should run on any JEE server.
 
