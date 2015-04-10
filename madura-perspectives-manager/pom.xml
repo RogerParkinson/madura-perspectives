@@ -27,15 +27,6 @@ communicate with each other.</description>
 			</roles>
 		</developer>
 	</developers>
-	<scm>
-		<url>https://github.com/RogerParkinson/madura-perspectives/</url>
-		<connection>scm:git:ssh://git@github.com:RogerParkinson/madura-perspectives.git</connection>
-		<developerConnection>scm:git:https://github.com/RogerParkinson/madura-perspectives.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/RogerParkinson/madura-perspectives/issues</url>
-	</issueManagement>
 
 	<dependencies>
 		<dependency>
@@ -161,25 +152,6 @@ communicate with each other.</description>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-							<files>
-								<file>../dev.properties</file>
-							</files>
-							<quiet>true</quiet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -201,25 +173,6 @@ communicate with each other.</description>
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>
-											properties-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.0-alpha-2,)
-										</versionRange>
-										<goals>
-											<goal>
-												read-project-properties
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>com.vaadin</groupId>

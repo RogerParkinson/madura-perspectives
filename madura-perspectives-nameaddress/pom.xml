@@ -27,15 +27,6 @@
 			</roles>
 		</developer>
 	</developers>
-	<scm>
-		<url>https://github.com/RogerParkinson/madura-perspectives/</url>
-		<connection>scm:git:ssh://git@github.com:RogerParkinson/madura-perspectives.git</connection>
-		<developerConnection>scm:git:https://github.com/RogerParkinson/madura-perspectives.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/RogerParkinson/madura-perspectives/issues</url>
-	</issueManagement>
 	<dependencies>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -62,25 +53,6 @@
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.4.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>properties-maven-plugin</artifactId>
-				<version>1.0-alpha-2</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-							<files>
-								<file>../dev.properties</file>
-							</files>
-							<quiet>true</quiet>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -134,25 +106,6 @@
 				<configuration>
 					<lifecycleMappingMetadata>
 						<pluginExecutions>
-							<pluginExecution>
-								<pluginExecutionFilter>
-									<groupId>org.codehaus.mojo</groupId>
-									<artifactId>
-										properties-maven-plugin
-									</artifactId>
-									<versionRange>
-										[1.0-alpha-2,)
-									</versionRange>
-									<goals>
-										<goal>
-											read-project-properties
-										</goal>
-									</goals>
-								</pluginExecutionFilter>
-								<action>
-									<ignore></ignore>
-								</action>
-							</pluginExecution>
 						</pluginExecutions>
 					</lifecycleMappingMetadata>
 				</configuration>
