@@ -77,6 +77,12 @@ communicate with each other.</description>
 	</dependencies>
 	<build>
 		<defaultGoal>package</defaultGoal>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>nz.co.senanque</groupId>
