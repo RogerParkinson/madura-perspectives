@@ -3,7 +3,7 @@
   <parent>
     <groupId>nz.co.senanque</groupId>
     <artifactId>madura-perspectives</artifactId>
-    <version>2.3.1-SNAPSHOT</version>
+    <version>2.3.1</version>
   </parent>
   <artifactId>madura-perspectives-manager</artifactId>
 	<packaging>war</packaging>
@@ -50,7 +50,7 @@ communicate with each other.</description>
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
 			<artifactId>madura-vaadinsupport</artifactId>
-			<version>${madura.vaadin.support.version}</version>
+			<version>2.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.servlet</groupId>
@@ -195,7 +195,7 @@ communicate with each other.</description>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -214,7 +214,7 @@ communicate with each other.</description>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
