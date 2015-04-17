@@ -7,7 +7,7 @@
   </parent>
   <groupId>nz.co.senanque</groupId>
   <artifactId>madura-perspectives</artifactId>
-  <version>2.3.1</version>
+  <version>2.3.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>madura-perspectives</name>
   <description>madura-perspectives</description>
