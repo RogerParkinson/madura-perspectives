@@ -50,7 +50,7 @@ communicate with each other.</description>
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
 			<artifactId>madura-vaadinsupport</artifactId>
-			<version>2.5.4</version>
+			<version>${madura.vaadin.support.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.servlet</groupId>
