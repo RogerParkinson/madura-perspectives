@@ -35,6 +35,9 @@ limitations under the License.
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+	<listener>
+	  <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 
 	<filter>
 		<filter-name>LoggerContextFilter</filter-name>
