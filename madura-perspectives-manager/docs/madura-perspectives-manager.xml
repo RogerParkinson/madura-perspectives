@@ -150,6 +150,12 @@
 		<table width="12cm">
 			<tw>12cm</tw>
 		<tr>
+			<td>2.4.0</td>
+		</tr>
+		<tr>
+			<td>Implemented bundle scope (from new version of Madura Bundles)</td>
+		</tr>
+		<tr>
 			<td>2.3.1</td>
 		</tr>
 		<tr>
