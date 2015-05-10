@@ -63,8 +63,6 @@ limitations under the License.
 
 	<!-- This is a demo login listener. Replace it with a your own production login listener for production systems  -->
   	<bean id="loginListener" class="nz.co.senanque.vaadinsupport.viewmanager.SpringLoginListener"/>
-    <bean id="permissionManager" class="nz.co.senanque.vaadinsupport.permissionmanager.PermissionManagerImpl"/>
-    <bean id="fieldFactory" class="nz.co.senanque.vaadinsupport.FieldFactory" scope="session"/>
-    <bean id="hints" class="nz.co.senanque.vaadinsupport.HintsImpl" scope="session"/>
+    <bean id="fieldFactory" class="nz.co.senanque.vaadinsupport.FieldFactory"/>
  
 </beans>

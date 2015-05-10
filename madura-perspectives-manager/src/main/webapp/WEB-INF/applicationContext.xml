@@ -70,6 +70,8 @@ limitations under the License.
 	<bean id="bundleListener" class="nz.co.senanque.perspectivemanager.BundleListenerImpl">
 		<property name="messageSource" ref="messageSource"/>
 	</bean>
+    <bean id="permissionManager" class="nz.co.senanque.vaadinsupport.permissionmanager.PermissionManagerImpl" scope="session"/>
+    <bean id="hints" class="nz.co.senanque.vaadinsupport.HintsImpl"/>
 
 <!--
 	This is an example of a production bundle manager, it uses a JNDI reference to locate a local directory that holds the bundles
@@ -79,6 +81,12 @@ limitations under the License.
 	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb">
 		<property name="directory" ref="bundlesDir"/>
 		<property name="time" value="10000"/>
+		<property name="inheritableBeans">
+			<map>
+				<entry key="bundleManager" value-ref="bundleManager"/>
+				<entry key="hints" value-ref="hints"/>
+			</map>
+		</property>
 	</bean>
  -->
 
@@ -86,7 +94,14 @@ limitations under the License.
  	This bundle manager configuration is suitable for demos. It locates a fixed set of bundles from a directory in the war file (WEB-INF/bundles)
 	Useful for demos but not for production because you cannot dynamically update the bundles.
  -->	
-	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb"/>	
+	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb">
+		<property name="inheritableBeans">
+			<map>
+				<entry key="bundleManager" value-ref="bundleManager"/>
+				<entry key="hints" value-ref="hints"/>
+			</map>
+		</property>
+	</bean>	
 
 
 </beans>

@@ -56,16 +56,12 @@ limitations under the License.
 	</bean>
 
 	
-	<!--
-	These beans are actually supplied by the main application and they are declared as session beans there
-	Spring will reuse session beans across bean factories so by declaring them here we get to use
-	the global copies
-	-->
-	<bean id="fieldFactory" class="nz.co.senanque.vaadinsupport.FieldFactory" scope="session"/>
-	<bean id="hints" class="nz.co.senanque.vaadinsupport.HintsImpl" scope="session"/>
-	<bean id="permissionManager" class="nz.co.senanque.vaadinsupport.permissionmanager.PermissionManagerImpl" scope="session"/>
+	<bean id="fieldFactory" class="nz.co.senanque.vaadinsupport.FieldFactory" scope="bundle"/>
+    <bean id="permissionManager" class="nz.co.senanque.vaadinsupport.permissionmanager.PermissionManagerImpl" scope="session"/>
 
-	<bean id="maduraSessionManager" class="nz.co.senanque.vaadinsupport.application.MaduraSessionManager" scope="session"/>
+	<bean id="maduraSessionManager" class="nz.co.senanque.vaadinsupport.application.MaduraSessionManager" scope="bundle">
+		<property name="formFieldFactory" ref="fieldFactory"/>
+	</bean>
 	<bean id="validationEngine" class="nz.co.senanque.validationengine.ValidationEngineImpl">
 		<property name="metadata" ref="metadata"/>
 		<property name="plugins">
