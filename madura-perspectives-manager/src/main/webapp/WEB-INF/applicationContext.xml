@@ -15,5 +15,34 @@
 			</list>
 		</property>
 	</bean>
+<!--
+	This is an example of a production bundle manager, it uses a JNDI reference to locate a local directory that holds the bundles
+	The directory is scanned every 10 seconds for changes in this configuration. 
+
+ 	<jee:jndi-lookup id="bundlesDir" jndi-name="java:/comp/env/BundlesDir" expected-type="java.lang.String" />
+	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb">
+		<property name="directory" ref="bundlesDir"/>
+		<property name="time" value="10000"/>
+		<property name="inheritableBeans">
+			<map>
+				<entry key="bundleManager" value-ref="bundleManager"/>
+				<entry key="hints" value-ref="hints"/>
+			</map>
+		</property>
+	</bean>
+ -->
+
+<!--
+ 	This bundle manager configuration is suitable for demos. It locates a fixed set of bundles from a directory in the war file (WEB-INF/bundles)
+	Useful for demos but not for production because you cannot dynamically update the bundles.
+ -->	
+	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb">
+		<property name="exportedBeans">
+			<map>
+				<entry key="bundleManager" value-ref="bundleManager"/>
+<!-- 				<entry key="hints" value-ref="hints"/> -->
+			</map>
+		</property>
+	</bean>	
 
 </beans>

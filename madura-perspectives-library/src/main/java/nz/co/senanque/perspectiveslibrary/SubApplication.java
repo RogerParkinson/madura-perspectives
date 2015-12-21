@@ -18,7 +18,7 @@ package nz.co.senanque.perspectiveslibrary;
 import nz.co.senanque.madura.bundlemap.BundleVersion;
 
 import org.springframework.context.MessageSource;
-import org.springframework.core.io.Resource;
+import com.vaadin.server.Resource;
 
 public interface SubApplication {
 

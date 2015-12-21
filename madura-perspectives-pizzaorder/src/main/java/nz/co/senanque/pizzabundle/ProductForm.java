@@ -14,8 +14,8 @@
  * limitations under the License.
  *******************************************************************************/
 package nz.co.senanque.pizzabundle;
-import nz.co.senanque.vaadinsupport.MaduraForm;
-import nz.co.senanque.vaadinsupport.application.MaduraSessionManager;
+import nz.co.senanque.vaadin.MaduraForm;
+import nz.co.senanque.vaadin.MaduraSessionManager;
 
 import com.vaadin.ui.VerticalLayout;
 

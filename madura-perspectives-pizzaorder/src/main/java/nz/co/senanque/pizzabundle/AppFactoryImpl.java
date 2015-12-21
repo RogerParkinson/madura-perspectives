@@ -15,16 +15,16 @@
  *******************************************************************************/
 package nz.co.senanque.pizzabundle;
 
-import nz.co.senanque.perspectivemanager.App;
-import nz.co.senanque.perspectivemanager.AppFactory;
-import nz.co.senanque.perspectivemanager.Blackboard;
+import nz.co.senanque.perspectiveslibrary.App;
+import nz.co.senanque.perspectiveslibrary.AppFactory;
+import nz.co.senanque.perspectiveslibrary.Blackboard;
 import nz.co.senanque.pizzaorder.instances.ItemType;
 import nz.co.senanque.pizzaorder.instances.OrderItem;
 import nz.co.senanque.pizzaorder.instances.Pizza;
-import nz.co.senanque.vaadinsupport.CommandExt;
-import nz.co.senanque.vaadinsupport.MenuItemPainter;
-import nz.co.senanque.vaadinsupport.SubmitButtonPainter;
-import nz.co.senanque.vaadinsupport.application.MaduraSessionManager;
+import nz.co.senanque.vaadin.CommandExt;
+import nz.co.senanque.vaadin.MaduraSessionManager;
+import nz.co.senanque.vaadin.MenuItemPainter;
+import nz.co.senanque.vaadin.SubmitButtonPainter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +72,7 @@ public class AppFactoryImpl implements AppFactory, MessageSourceAware, BeanFacto
 		final MenuBar.MenuItem edit = menuBar.addItem(m_messageSourceAccessor.getMessage("edit", "Edit"), null);
 		MenuItem menuItem = edit.addItem(m_messageSourceAccessor.getMessage("save", "Save"), new CommandExt(){
 
-			private static final long serialVersionUID = 7142024506317299918L;
+			private static final long serialVersionUID = 1L;
 			MenuItemPainter m_menuItemPainter = new SubmitButtonPainter(m_maduraSessionManager);
 			
 			public void menuSelected(MenuItem selectedItem) {
@@ -80,7 +80,6 @@ public class AppFactoryImpl implements AppFactory, MessageSourceAware, BeanFacto
 			}
 
 			public MenuItemPainter getPainter() {
-//				m_menuItemPainter.setProperties(layout.getProperties());
 				return m_menuItemPainter;
 			}
 

@@ -21,7 +21,9 @@ import nz.co.senanque.madura.bundlemap.BundleVersion;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.core.io.Resource;
+
+import com.vaadin.server.ClassResource;
+import com.vaadin.server.Resource;
 
 /**
  * Encapsulates a sub-application that can be plugged into the perspectives manager.
@@ -72,10 +74,7 @@ public class SubApplicationimpl implements SubApplication, Serializable  {
 	}
 
 	public Resource getIcon() {
-		return m_icon;
-	}
-	public void setIcon(Resource icon) {
-		m_icon = icon;
+		return new ClassResource(m_appFactory.getClass(),"/icon.png");
 	}
 	public String getVersion() {
 		return m_version;

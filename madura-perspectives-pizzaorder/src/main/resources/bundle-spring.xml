@@ -36,9 +36,8 @@ limitations under the License.
 	<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">
 		<constructor-arg value="${bundle.name}"/>
 	</bean>
-	<bean id="SubApplication" class="nz.co.senanque.perspectivemanager.SubApplicationimpl">
+	<bean id="SubApplication" class="nz.co.senanque.perspectiveslibrary.SubApplicationimpl">
 		<property name="icon" value="classpath:icon.png"/>
-		<property name="version" value="${Bundle-Version}"/>
 		<property name="caption" value="${Bundle-Name}"/>
 		<property name="description" value="${Bundle-Description}"/>
 		<property name="appFactory">

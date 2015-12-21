@@ -3,7 +3,7 @@
   <parent>
     <groupId>nz.co.senanque</groupId>
     <artifactId>madura-perspectives</artifactId>
-    <version>2.4.1-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>madura-perspectives-pizzaorder</artifactId>
 	<url>www.madurasoftware.com</url>
@@ -27,13 +27,16 @@
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
 			<artifactId>madura-rules</artifactId>
-			<version>${madura.rules.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate.javax.persistence</groupId>
+		    <artifactId>hibernate-jpa-2.1-api</artifactId>
+		    <version>1.0.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
 			<exclusions>
 				<!-- Needs to be excluded because it pulls the wrong version -->
 				<exclusion>
@@ -45,158 +48,65 @@
 		</dependency>
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
-			<artifactId>madura-vaadinsupport</artifactId>
-			<version>${madura.vaadin.support.version}</version>
-			<scope>provided</scope>
+			<artifactId>madura-vaadin</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.spec.javax.servlet</groupId>
-			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
-			<version>1.0.2.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jvnet.jaxb2_commons</groupId>
-			<artifactId>jaxb2-basics</artifactId>
-			<version>0.6.2</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>nz.co.senanque</groupId>
+			<artifactId>madura-perspectives-library</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.4.1</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.8.0</version>
+				<groupId>nz.co.senanque</groupId>
+				<artifactId>madura-objects-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<schemaDirectory>src/main/resources/</schemaDirectory>
-							<extension>true</extension>
 							<schemaIncludes>
 								<include>PizzaOrder.xsd</include>
 							</schemaIncludes>
-							<generateDirectory>${basedir}/generated-sources/xjc</generateDirectory>
-							<addCompileSourceRoot>true</addCompileSourceRoot>
-							<cleanPackageDirectories>false</cleanPackageDirectories>
-							<forceRegenerate>true</forceRegenerate>
-							<removeOldOutput>false</removeOldOutput>
-							<extension>true</extension>
-							<args>
-								<arg>-extension</arg>
-								<arg>-Xequals</arg>
-								<arg>-XtoString</arg>
-								<arg>-Xannotate</arg>
-								<arg>-XhashCode</arg>
-								<arg>-Xhyperjaxb3-ejb</arg>
-								<arg>-Xmadura-objects</arg>
-								<arg>-Xvalidator</arg>
-							</args>
 						</configuration>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>nz.co.senanque</groupId>
-						<artifactId>madura-objects</artifactId>
-						<version>${madura.objects.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.jvnet.hyperjaxb3</groupId>
-						<artifactId>hyperjaxb3-ejb-runtime</artifactId>
-						<version>${hyperjaxb.version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>commons-logging</groupId>
-								<artifactId>commons-logging</artifactId>
-							</exclusion>
-							<exclusion>
-								<groupId>org.jvnet.hyperjaxb3</groupId>
-								<artifactId>hyperjaxb3-ejb-roundtrip</artifactId>
-							</exclusion>
-							<!-- Needs to be excluded because it pulls the wrong version -->
-							<exclusion>
-								<groupId>org.springframework</groupId>
-								<artifactId>spring</artifactId>
-							</exclusion>
-							<!-- Needs to be excluded because it pulls the wrong version -->
-							<exclusion>
-								<groupId>org.slf4j</groupId>
-								<artifactId>slf4j-log4j12</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.jvnet.hyperjaxb3</groupId>
-						<artifactId>hyperjaxb3-ejb-plugin</artifactId>
-						<version>${hyperjaxb.version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>commons-logging</groupId>
-								<artifactId>commons-logging</artifactId>
-							</exclusion>
-							<exclusion>
-								<groupId>org.jvnet.hyperjaxb3</groupId>
-								<artifactId>hyperjaxb3-ejb-roundtrip</artifactId>
-							</exclusion>
-							<!-- Needs to be excluded because it pulls the wrong version -->
-							<exclusion>
-								<groupId>org.springframework</groupId>
-								<artifactId>spring</artifactId>
-							</exclusion>
-							<!-- Needs to be excluded because it pulls the wrong version -->
-							<exclusion>
-								<groupId>org.slf4j</groupId>
-								<artifactId>slf4j-log4j12</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<!-- These two are needed to manage logging -->
-					<dependency>
-						<groupId>com.pyx4j</groupId>
-						<artifactId>maven-plugin-log4j</artifactId>
-						<version>1.0.1</version>
-					</dependency>
-					<dependency>
-						<groupId>org.slf4j</groupId>
-						<artifactId>slf4j-log4j12</artifactId>
-						<version>${slf4j.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-rules-maven-plugin</artifactId>
-				<version>${madura.rules.maven.plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
 							<goal>xjr</goal>
 						</goals>
 						<configuration>
-							<rules>PizzaOrderRules.txt</rules>
+							<rules>PizzaOrder.rul</rules>
 							<schema>PizzaOrder.xsd</schema>
 							<bufferSize>2000</bufferSize>
 							<packageName>nz.co.senanque.pizzaorder.rules</packageName>
@@ -207,7 +117,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
 				<executions>
 					<execution>
 						<id>default-jar</id>
@@ -280,13 +189,25 @@
 						</configuration>
 						-->
 					</execution>
+					<execution>
+						<id>unpack-dependencies</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<includes>**/BundleRootImpl.class</includes>
+							<outputDirectory>${project.build.directory}/classes</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -297,54 +218,39 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
-											org.jvnet.jaxb2.maven2
+											nz.co.senanque
 										</groupId>
-										<artifactId>
-											maven-jaxb2-plugin
-										</artifactId>
-										<versionRange>
-											[0.8.0,)
-										</versionRange>
-										<goals>
-											<goal>generate</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>nz.co.senanque</groupId>
 										<artifactId>
 											madura-rules-maven-plugin
 										</artifactId>
 										<versionRange>
-											[1.2.0,)
+											[3.0.0-SNAPSHOT,)
 										</versionRange>
 										<goals>
 											<goal>xjr</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>
-											org.apache.maven.plugins
+											nz.co.senanque
 										</groupId>
 										<artifactId>
-											maven-dependency-plugin
+											madura-objects-maven-plugin
 										</artifactId>
-										<versionRange>[2.8,)</versionRange>
+										<versionRange>
+											[3.0.0-SNAPSHOT,)
+										</versionRange>
 										<goals>
-											<goal>copy-dependencies</goal>
+											<goal>generate</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -363,7 +269,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

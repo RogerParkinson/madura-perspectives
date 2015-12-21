@@ -15,15 +15,17 @@
  *******************************************************************************/
 package nz.co.senanque.bundle1;
 
-import nz.co.senanque.perspectivemanager.App;
-import nz.co.senanque.perspectivemanager.AppFactory;
-import nz.co.senanque.perspectivemanager.Blackboard;
+import nz.co.senanque.perspectiveslibrary.App;
+import nz.co.senanque.perspectiveslibrary.AppFactory;
+import nz.co.senanque.perspectiveslibrary.Blackboard;
 
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 
 /**
+ * Creates an app for the Name and Address bundle.
+ * 
  * @author Roger Parkinson
  *
  */
@@ -41,16 +43,25 @@ public class AppFactoryImpl implements AppFactory {
 		ret.setComponentContainer(layout);
 		MenuBar menuBar = new MenuBar();
 		final MenuBar.MenuItem file = menuBar.addItem("File", null);
-		file.addItem("close", new Command(){
+		file.addItem("Close", new Command(){
 
-			private static final long serialVersionUID = 7142024506317299918L;
+			private static final long serialVersionUID = -1L;
 
 			public void menuSelected(MenuItem selectedItem) {
 				layout.close();
 				
 			}});
+		final MenuBar.MenuItem save = menuBar.addItem("Edit", null);
+		save.addItem("Save", new Command(){
+
+			private static final long serialVersionUID = -1L;
+
+			public void menuSelected(MenuItem selectedItem) {
+				layout.close();
+				
+			}});
+		
 		ret.setMenuBar(menuBar);
 		return ret;
 	}
-
 }

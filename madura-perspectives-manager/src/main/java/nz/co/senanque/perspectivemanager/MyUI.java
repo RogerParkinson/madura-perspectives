@@ -1,6 +1,5 @@
 package nz.co.senanque.perspectivemanager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.List;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 
+import nz.co.senanque.madura.bundle.spring.BundledInterfaceRegistrar;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
 import nz.co.senanque.perspectiveslibrary.BundleListenerImpl;
@@ -23,6 +23,7 @@ import org.springframework.context.MessageSourceAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -33,7 +34,6 @@ import com.vaadin.annotations.Title;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
-import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.EnableVaadin;
@@ -41,8 +41,6 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.spring.server.SpringVaadinServlet;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
@@ -53,7 +51,6 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.BaseTheme;
 
 @Theme("mytheme")
 @Title("Madura Vaadin Demo")
@@ -98,7 +95,9 @@ public class MyUI extends UI implements MessageSourceAware {
 
     @Configuration
     @EnableVaadin
+    @Import(BundledInterfaceRegistrar.class)
     @ComponentScan(basePackages = {
+    		"nz.co.senanque.madura.bundle",
     		"nz.co.senanque.vaadin"})	// madura-objects
     @PropertySource("classpath:config.properties")
     public static class MyConfiguration {
@@ -140,36 +139,35 @@ public class MyUI extends UI implements MessageSourceAware {
 		final MenuBar.MenuItem help = createHelpMenu(messageSourceAccessor);
 		for (SubApplication subApplication : m_bundleListenerImpl
 				.getSubApplicationValues()) {
-			setupSubApplication(subApplication);
+			setupSubApplication(subApplication, file);
 		}
+		file.addItem(messageSourceAccessor.getMessage("logout","Logout"), new Command(){
+
+			private static final long serialVersionUID = -1L;
+
+			public void menuSelected(MenuItem selectedItem) {
+				for (SubApplication subApplication : m_bundleListenerImpl
+						.getSubApplicationValues()) {
+					subApplication.getBundleVersion().decrement();
+				}
+				m_permissionManager.close(getUI());
+			}
+			});
+
     }
-	private void setupSubApplication(final SubApplication subApplication)
+	private void setupSubApplication(final SubApplication subApplication, final MenuBar.MenuItem file)
 	{
 		subApplication.getBundleVersion().increment();
-		Button b = new Button(subApplication.getCaption());
-        b.setDescription(subApplication.getDescription());
-        org.springframework.core.io.Resource icon = subApplication.getIcon();
-		if (icon != null) {
-			try {
-				b.setIcon(new ExternalResource(icon.getURL()));
-			} catch (IOException e) {
-				m_logger.warn("Failed to load icon for bundle {}",subApplication.getBundleVersion());
-			}
-		}
-        b.setStyleName(BaseTheme.BUTTON_LINK);
-        b.addClickListener(new Button.ClickListener() {
-        	
-			private static final long serialVersionUID = -1L;
+		file.addItem(subApplication.getCaption(), subApplication.getIcon(), new Command() {
+
+			private static final long serialVersionUID = 1L;
 			private App m_app=null;
-			
-			public void buttonClick(ClickEvent event) {
-				
+			public void menuSelected(MenuItem selectedItem) {
 				Iterator<Component> it = ApplicationlBodyLayout.iterator();
 				while (it.hasNext())
 				{
 					Component component = it.next();
 					ApplicationlBodyLayout.removeComponent(component);
-					component.detach();
 					break;
 				}
 				if (m_app == null)
@@ -181,9 +179,7 @@ public class MyUI extends UI implements MessageSourceAware {
 				MenuCloner.clean(menuBar,m_added);
 				MenuCloner.merge(menuBar, m_app.getMenuBar(), m_added);
 				menuBar.markAsDirty();
-			}
-		}); // react to clicks
-        ApplicationIconContainer.addComponent(b);
+			}});
 	}
 
     private MenuBar.MenuItem createHelpMenu(final MessageSourceAccessor messageSourceAccessor) {
@@ -206,18 +202,6 @@ public class MyUI extends UI implements MessageSourceAware {
     }
     private MenuBar.MenuItem createFileMenu(final MessageSourceAccessor messageSourceAccessor) {
     	MenuBar.MenuItem file = menuBar.addItem(messageSourceAccessor.getMessage("file","File"), null);
-		file.addItem(messageSourceAccessor.getMessage("logout","Logout"), new Command(){
-
-			private static final long serialVersionUID = -1L;
-
-			public void menuSelected(MenuItem selectedItem) {
-				for (SubApplication subApplication : m_bundleListenerImpl
-						.getSubApplicationValues()) {
-					subApplication.getBundleVersion().decrement();
-				}
-				m_permissionManager.close(getUI());
-			}
-			});
 		return file;
     }
 	private VerticalLayout buildMainLayout(MessageSourceAccessor messageSourceAccessor) {

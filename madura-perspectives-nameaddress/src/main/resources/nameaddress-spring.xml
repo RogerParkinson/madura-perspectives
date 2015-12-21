@@ -25,8 +25,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 	<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">
 		<constructor-arg value="${bundle.name}"/>
 	</bean>
-	<bean id="SubApplication" class="nz.co.senanque.perspectivemanager.SubApplicationimpl">
-		<property name="icon" value="classpath:icon.png"/>
+	<bean id="SubApplication" class="nz.co.senanque.perspectiveslibrary.SubApplicationimpl">
 		<property name="version" value="${Bundle-Version}"/>
 		<property name="caption" value="${Bundle-Name}"/>
 		<property name="description" value="${Bundle-Description}"/>

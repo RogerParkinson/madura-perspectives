@@ -40,9 +40,17 @@ public class MenuCloner {
 			for (MenuBar.MenuItem sourceItem:source.getItems())
 			{
 				MenuBar.MenuItem targetItem = findItem(sourceItem.getText(),targetItems);
-				if (targetItem == null)
-				{
-					targetItem = target.addItem(sourceItem.getText(), sourceItem.getCommand());
+				if (targetItem == null) {
+					try {
+						int sizeOfTarget = target.getSize();
+						if (sizeOfTarget > 0) {
+							targetItem = target.addItemBefore(sourceItem.getText(), null, sourceItem.getCommand(),target.getItems().get(sizeOfTarget-1));
+						}
+					} catch (Exception e) {
+					}
+					if (targetItem == null) {
+						targetItem = target.addItem(sourceItem.getText(), sourceItem.getCommand());
+					}
 					fixMenuItem(targetItem,sourceItem);
 					added.add(targetItem);
 				}
@@ -82,7 +90,16 @@ public class MenuCloner {
 					MenuBar.MenuItem targetItem = findItem(sourceItem.getText(),targetItems);
 					if (targetItem == null)
 					{
-						targetItem = target.addItem(sourceItem.getText(), sourceItem.getCommand());
+						try {
+							int sizeOfTarget = target.getChildren().size();
+							if (sizeOfTarget > 0) {
+								targetItem = target.addItemBefore(sourceItem.getText(), null, sourceItem.getCommand(),target.getChildren().get(sizeOfTarget-1));
+							}
+						} catch (Exception e) {
+						}
+						if (targetItem == null) {
+							targetItem = target.addItem(sourceItem.getText(), sourceItem.getCommand());
+						}
 						fixMenuItem(targetItem,sourceItem);
 						added.add(targetItem);
 					}

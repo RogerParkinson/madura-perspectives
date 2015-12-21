@@ -3,7 +3,7 @@
   <parent>
     <groupId>nz.co.senanque</groupId>
     <artifactId>madura-perspectives</artifactId>
-    <version>2.4.1-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>madura-perspectives-name</artifactId>
 	<url>www.madurasoftware.com</url>
@@ -28,42 +28,68 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
 			<scope>provided</scope>
-			<exclusions>
-				<!-- Needs to be excluded because it pulls the wrong version -->
-				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
-			<artifactId>madura-vaadinsupport</artifactId>
-			<version>${madura.vaadin.support.version}</version>
-			<scope>provided</scope>
+			<artifactId>madura-bundle</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nz.co.senanque</groupId>
+			<artifactId>madura-vaadin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nz.co.senanque</groupId>
+			<artifactId>madura-perspectives-library</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.4.1</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-dependencies</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<includes>**/BundleRootImpl.class</includes>
+							<outputDirectory>${project.build.directory}/classes</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		      <plugin>
 		        <artifactId>maven-jar-plugin</artifactId>
-		        <version>2.3.1</version>
 		        <executions>
 		          <execution>
 		            <id>default-jar</id>
@@ -74,17 +100,17 @@
 		            <configuration>
 				          <archive>
 				            <index>false</index>
-				            <addMavenDescriptor>false</addMavenDescriptor>
+				            <addMavenDescriptor>true</addMavenDescriptor>
 				            <manifest>
 				              <addClasspath>false</addClasspath>
 				            </manifest>
 				            <manifestEntries>
 				              <Built-By>${user.name}</Built-By>
-				              <Bundle-Activator>nz.co.senanque.madura.bundle.BundleRootImpl</Bundle-Activator>
 				              <Bundle-Description>Name Field</Bundle-Description>
 				              <Bundle-Name>Name</Bundle-Name>
 				              <Bundle-Version>${project.version}</Bundle-Version>
 				              <Bundle-Context>name-spring.xml</Bundle-Context>
+				              <Bundle-Activator>nz.co.senanque.madura.bundle.BundleRootImpl</Bundle-Activator>
 				            </manifestEntries>
 				          </archive>
 						<outputDirectory>../madura-perspectives-manager/src/main/webapp/WEB-INF/bundles/</outputDirectory>
@@ -93,40 +119,5 @@
 		        </executions>
 		      </plugin>
 		</plugins>
-		<pluginManagement>
-		<plugins>
-			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-			<plugin>
-				<groupId>org.eclipse.m2e</groupId>
-				<artifactId>lifecycle-mapping</artifactId>
-				<version>1.0.0</version>
-				<configuration>
-					<lifecycleMappingMetadata>
-						<pluginExecutions>
-							<pluginExecution>
-								<pluginExecutionFilter>
-									<groupId>org.codehaus.mojo</groupId>
-									<artifactId>
-										properties-maven-plugin
-									</artifactId>
-									<versionRange>
-										[1.0-alpha-2,)
-									</versionRange>
-									<goals>
-										<goal>
-											read-project-properties
-										</goal>
-									</goals>
-								</pluginExecutionFilter>
-								<action>
-									<ignore />
-								</action>
-							</pluginExecution>
-						</pluginExecutions>
-					</lifecycleMappingMetadata>
-				</configuration>
-			</plugin>
-		</plugins>
-		</pluginManagement>
 	</build>
 </project>

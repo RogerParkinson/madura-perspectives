@@ -15,22 +15,19 @@
  *******************************************************************************/
 package nz.co.senanque.bundle2;
 
-import nz.co.senanque.perspectivemanager.App;
-import nz.co.senanque.perspectivemanager.AppFactory;
-import nz.co.senanque.perspectivemanager.Blackboard;
-
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
+import nz.co.senanque.perspectiveslibrary.App;
+import nz.co.senanque.perspectiveslibrary.AppFactory;
+import nz.co.senanque.perspectiveslibrary.Blackboard;
 
 /**
+ * This is a simple app factory. It creates a layout and tells the blackboard about it.
+ * It does not add any extra menu options.
+ * 
  * @author Roger Parkinson
  *
  */
-public class AppFactoryImpl implements AppFactory, BeanFactoryAware {
+public class AppFactoryImpl implements AppFactory {
 	
-	private BeanFactory m_beanFactory;
-
 	@Override
 	public App createApp(Blackboard blackboard)
 	{
@@ -40,8 +37,4 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware {
 		ret.setComponentContainer(layout);
 		return ret;
 	}
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		m_beanFactory = beanFactory;
-	}
-
 }
