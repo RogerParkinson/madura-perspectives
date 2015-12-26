@@ -17,7 +17,7 @@
 		<project.target.version>1.7</project.target.version>
 		<pdf>target/${project.artifactId}-${project.version}.pdf</pdf>
 		<spring.framework.version>4.2.3.RELEASE</spring.framework.version>
-		<logback.version>1.0.1</logback.version>
+		<logback.version>1.0.3</logback.version>
 		<madura.vaadin.support.version>3.0.0-SNAPSHOT</madura.vaadin.support.version>
 		<madura.rules.version>3.0.0-SNAPSHOT</madura.rules.version>
 		<madura.rules.maven.plugin.version>1.2.3-SNAPSHOT</madura.rules.maven.plugin.version>
@@ -322,6 +322,64 @@
 			        <configuration>
 			          <lifecycleMappingMetadata>
 			            <pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>
+										nz.co.senanque
+									</groupId>
+									<artifactId>
+										madura-rules-maven-plugin
+									</artifactId>
+									<versionRange>
+										[3.0.0-SNAPSHOT,)
+									</versionRange>
+									<goals>
+										<goal>xjr</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore></ignore>
+								</action>
+							</pluginExecution>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>
+										nz.co.senanque
+									</groupId>
+									<artifactId>
+										madura-objects-maven-plugin
+									</artifactId>
+									<versionRange>
+										[3.0.0-SNAPSHOT,)
+									</versionRange>
+									<goals>
+										<goal>generate</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore></ignore>
+								</action>
+							</pluginExecution>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>
+										org.codehaus.mojo
+									</groupId>
+									<artifactId>
+										build-helper-maven-plugin
+									</artifactId>
+									<versionRange>
+										[1.5,)
+									</versionRange>
+									<goals>
+										<goal>add-source</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore></ignore>
+								</action>
+							</pluginExecution>
+
 			              <pluginExecution>
 			                <pluginExecutionFilter>
 			                  <groupId>org.apache.maven.plugins</groupId>
