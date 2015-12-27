@@ -36,7 +36,7 @@ import com.vaadin.server.Resource;
  */
 public class SubApplicationimpl implements SubApplication, Serializable  {
 	
-	private static final long serialVersionUID = -1367277688477759273L;
+	private static final long serialVersionUID = 1L;
 	private String m_caption;
 	private String m_description;
 	private Resource m_icon;
@@ -62,7 +62,7 @@ public class SubApplicationimpl implements SubApplication, Serializable  {
 	 */
 	public String getDescription() {
 		MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(m_messageSource);
-		return (m_description==null)?null:messageSourceAccessor.getMessage(m_description,null,m_description);
+		return (m_description==null)?null:messageSourceAccessor.getMessage("project.description",null,m_description);
 	}
 
 	public void setCaption(String caption) {

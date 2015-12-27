@@ -106,7 +106,7 @@
 				            </manifest>
 				            <manifestEntries>
 				              <Built-By>${user.name}</Built-By>
-				              <Bundle-Description>Name Field</Bundle-Description>
+				              <Bundle-Description>user.details</Bundle-Description>
 				              <Bundle-Name>Name</Bundle-Name>
 				              <Bundle-Version>${project.version}</Bundle-Version>
 				              <Bundle-Context>name-spring.xml</Bundle-Context>
