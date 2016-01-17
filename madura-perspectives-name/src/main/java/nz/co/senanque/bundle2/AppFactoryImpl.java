@@ -37,4 +37,5 @@ public class AppFactoryImpl implements AppFactory {
 		ret.setComponentContainer(layout);
 		return ret;
 	}
+
 }

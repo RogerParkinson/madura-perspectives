@@ -18,6 +18,7 @@ package nz.co.senanque.bundle1;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.AppFactory;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
+import nz.co.senanque.vaadin.MaduraFieldGroup;
 
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
@@ -31,6 +32,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
  */
 public class AppFactoryImpl implements AppFactory {
 	
+	
 	/* (non-Javadoc)
 	 * @see nz.co.senanque.bundle1.AppFactory#createApp()
 	 */
@@ -41,6 +43,7 @@ public class AppFactoryImpl implements AppFactory {
 		final Layout layout = new Layout();
 		layout.setBlackboard(blackboard);
 		ret.setComponentContainer(layout);
+
 		MenuBar menuBar = new MenuBar();
 		final MenuBar.MenuItem file = menuBar.addItem("File", null);
 		file.addItem("Close", new Command(){

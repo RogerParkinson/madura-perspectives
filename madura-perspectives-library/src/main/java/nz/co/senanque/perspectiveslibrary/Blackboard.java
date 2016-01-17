@@ -22,6 +22,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
+import com.vaadin.spring.annotation.UIScope;
+
 /**
  * The blackboard facilitiates loose coupling between applications using a publish and subscribe pattern
  * An application publishes a change of value and this is passed to all the registered listeners.
@@ -40,9 +44,11 @@ import java.util.Set;
  * @author Roger Parkinson
  *
  */
-public class Blackboard implements Serializable{
+@Component("blackboard")
+@UIScope
+public class Blackboard implements Serializable {
 	
-	private static final long serialVersionUID = 1138836348000349209L;
+	private static final long serialVersionUID = 1L;
 	private Set<BlackboardListener> m_listeners = Collections.synchronizedSet(new HashSet<BlackboardListener>());
 	private Map<String,Object> m_publishedItems = Collections.synchronizedMap(new HashMap<String,Object>());
 	

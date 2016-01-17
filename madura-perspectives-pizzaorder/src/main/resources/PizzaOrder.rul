@@ -1,38 +1,6 @@
-formula: OrderItem "description"
-{
-	description = format(name,name);
-}
 formula: Order "sum"
 {
-	amount = sum(orderItems.amount); 
-}
-formula: Pizza "p"
-{
-	itemType = ItemType.PIZZA;
-}
-formula: Drink "d"
-{
-	amount = 2.50;
-}
-formula: Drink "d"
-{
-	itemType = ItemType.DRINK;
-}
-formula: Extra "e"
-{
-	itemType = ItemType.EXTRA;
-}
-formula: Extra "e"
-{
-	amount = 8.00;
-}
-formula: Dessert "e"
-{
-	itemType = ItemType.DESSERT;
-}
-formula: Dessert "e"
-{
-	amount = 8.00;
+	amount = sum(pizzas.amount); 
 }
 rule: Pizza "p2"
 {
@@ -43,18 +11,22 @@ rule: Pizza "p2"
 		amount = 10;
 	}
 }
+formula: Pizza "description"
+{
+	description = base+"-"+size+"-"+topping;
+}
 rule: Order "shoppingcartsize"
 {
-	if (count(orderItems) > 0)
+	if (count(pizzas) > 0)
 	{
-		shoppingCartStatus = format("shopping.cart.status",count(orderItems));
+		orderStatus = format("shopping.cart.status",count(pizzas));
 	}
 }
 rule: Order "shoppingcartsize"
 {
-	if (count(orderItems) == 0)
+	if (count(pizzas) == 0)
 	{
-		shoppingCartStatus = format("shopping.cart.status.empty",0);
+		orderStatus = format("shopping.cart.status.empty",0);
 	}
 }
 rule: Pizza "p3"
@@ -74,16 +46,33 @@ rule: Pizza "p4"
 		amount = 20;
 	}
 }
-constraint: Pizza "p5"
-{
-	testDouble > 100D;
-}
 rule: Customer "dynamic"
 {
 	if (name == "fred")
 	{
 		dynamic = true;
 	}
+}
+
+formula: Customer "BMI"
+{
+	bmi = weight / (height * height);
+}
+formula: Customer "Height Metric"
+{
+	height = heightMetric;
+}
+formula: Customer "Height Imperial"
+{
+	height = (heightFeet * 0.3048D) + (heightInches * 0.0254D);
+}
+formula: Customer "Weight metric"
+{
+	weight = weightKilos;
+}
+formula: Customer "Weight pounds"
+{
+	weight = weightPounds * 0.453D;
 }
 
 

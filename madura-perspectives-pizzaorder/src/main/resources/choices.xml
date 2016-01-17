@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <!-- 
 Copyright (c)2013 Prometheus Consulting
 
@@ -14,8 +15,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<MaduraValidator xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xi:noNamespaceSchemaLocation="http://oss.sonatype.org/content/repositories/releases/nz/co/senanque/madura-objects/2.2.4/choices-2.2.4.xsd">
+<MaduraValidator xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.madurasoftware.com/choices.xsd">
+
+	<ChoiceList name="Genders">
+		<Choice name="M">Male</Choice>
+		<Choice name="F">Female</Choice>
+		<Choice name="O">Other</Choice>
+	</ChoiceList>
 	<ChoiceList name="customerType">
 		<Choice name="a">A</Choice>
 		<Choice name="b">B</Choice>
@@ -77,33 +84,9 @@ limitations under the License.
 			</Row>
 		</Rows>
 	</DecisionTable>
-	<!-- 
-	<DecisionTable name="prices" scope="Pizza" message="nz.co.senanque.pizzaorder.rules.decisionTable">
-		<ColumnNames>
-			<ColumnName autoAssign="false">name</ColumnName>
-			<ColumnName>size</ColumnName>
-		</ColumnNames>
-		<Rows>
-			<Row>
-				<Column>Seafood</Column><Column>Small</Column>
-			</Row>
-			<Row>
-				<Column>Italian</Column><Column>Medium</Column>
-			</Row>
-			<Row>
-				<Column>Spanish</Column><Column>Medium</Column>
-			</Row>
-			<Row>
-				<Column>Hawaiian</Column><Column>Large</Column>
-			</Row>
-			<Row>
-				<Column>Greek</Column><Column>Large</Column>
-			</Row>
-		</Rows>
-	</DecisionTable>
-	 -->
 	<Constants>
 		<Constant name="xyz">aaaab</Constant>
 	</Constants>
+
 </MaduraValidator>
 	

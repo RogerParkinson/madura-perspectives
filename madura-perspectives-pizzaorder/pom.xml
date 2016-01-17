@@ -141,7 +141,7 @@
 									<Bundle-Description>project.description</Bundle-Description>
 									<Bundle-Name>${project.artifactId}</Bundle-Name>
 									<Bundle-Version>${project.version}</Bundle-Version>
-									<Bundle-Context>bundle-spring.xml</Bundle-Context>
+				              		<Bundle-Context>bundle-spring.xml</Bundle-Context>
 								</manifestEntries>
 							</archive>
 							<outputDirectory>../madura-perspectives-manager/src/main/webapp/WEB-INF/bundles/</outputDirectory>

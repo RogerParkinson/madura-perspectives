@@ -15,87 +15,36 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <beans xmlns="http://www.springframework.org/schema/beans" 
-    xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation=" 
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 	>
 
-	<context:component-scan base-package="nz.co.senanque.pizzaorder.rules"/>
+	<context:component-scan base-package="nz.co.senanque.pizzabundle,nz.co.senanque.pizzaorder.rules,nz.co.senanque.vaadin,nz.co.senanque.validationengine,nz.co.senanque.rules"/>
 	<context:annotation-config/>
 	
 	<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">
 		<constructor-arg value="${bundle.name}"/>
 	</bean>
 	<bean id="SubApplication" class="nz.co.senanque.perspectiveslibrary.SubApplicationimpl">
-		<property name="icon" value="classpath:icon.png"/>
+		<property name="version" value="${Bundle-Version}"/>
 		<property name="caption" value="${Bundle-Name}"/>
 		<property name="description" value="${Bundle-Description}"/>
 		<property name="appFactory">
-			<bean class="nz.co.senanque.pizzabundle.AppFactoryImpl"/>
-		</property>
-		<property name="messageSource">
-			<bean class="org.springframework.context.support.ResourceBundleMessageSource">
-				<property name="basenames">
-					<list>
-						<value>messages</value>
-					</list>
-				</property>
+			<bean class="nz.co.senanque.pizzabundle.AppFactoryImpl">
 			</bean>
 		</property>
+		<property name="messageSource" ref="messageSource"/>
 	</bean>
-
 	
-	<bean id="fieldFactory" class="nz.co.senanque.vaadinsupport.FieldFactory" scope="bundle"/>
-    <bean id="permissionManager" class="nz.co.senanque.vaadinsupport.permissionmanager.PermissionManagerImpl" scope="session"/>
-
-	<bean id="maduraSessionManager" class="nz.co.senanque.vaadinsupport.application.MaduraSessionManager" scope="bundle">
-		<property name="formFieldFactory" ref="fieldFactory"/>
-	</bean>
-	<bean id="validationEngine" class="nz.co.senanque.validationengine.ValidationEngineImpl">
-		<property name="metadata" ref="metadata"/>
-		<property name="plugins">
+	<context:property-placeholder location="classpath:configb.properties" />
+	<bean id="messageSource" class="nz.co.senanque.resourceloader.ResourceBundleMessageSourceExt">
+		<property name="basenames">
 			<list>
-				<ref bean="MaduraRulesPlugin"/>
+				<value>ApplicationMessages</value>
 			</list>
 		</property>
 	</bean>
-	<bean id="metadata" class="nz.co.senanque.validationengine.metadata.AnnotationsMetadataFactory">
-		<property name="package" value="nz.co.senanque.pizzaorder.instances"/>
-		<property name="fieldValidators">
-			<list>
-				<value>nz.co.senanque.validationengine.fieldvalidators.RegexValidator</value>
-				<value>nz.co.senanque.validationengine.fieldvalidators.LengthValidator</value>
-				<value>nz.co.senanque.validationengine.fieldvalidators.RangeValidator</value>
-				<value>nz.co.senanque.validationengine.fieldvalidators.EmailValidator</value>
-				<value>nz.co.senanque.validationengine.fieldvalidators.DigitsValidator</value>
-			</list>
-		</property>
-		<property name="choicesDocument" value="classpath:choices.xml"/>
-	</bean>
-	<bean id="MaduraRulesPlugin" class="nz.co.senanque.rules.RulesPlugin"/>
-	<bean id="messageSource" class="nz.co.senanque.localemanagement.XMLMessageSource">
-		<property name="resource" value="classpath:/Messages.xml"/>
-		<property name="parentMessageSource">
-			<bean class="org.springframework.context.support.ResourceBundleMessageSource">
-				<property name="basenames">
-					<list>
-						<value>org/springframework/security/messages</value>
-						<value>ValidationMessages</value>
-						<value>nz/co/senanque/pizzaorder/rules/messages</value>
-					</list>
-				</property>
-			</bean>
-		</property>
-	</bean>
-
 </beans>

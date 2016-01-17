@@ -18,13 +18,10 @@ package nz.co.senanque.pizzabundle;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.AppFactory;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
-import nz.co.senanque.pizzaorder.instances.ItemType;
-import nz.co.senanque.pizzaorder.instances.OrderItem;
 import nz.co.senanque.pizzaorder.instances.Pizza;
 import nz.co.senanque.vaadin.CommandExt;
+import nz.co.senanque.vaadin.MaduraFieldGroup;
 import nz.co.senanque.vaadin.MaduraSessionManager;
-import nz.co.senanque.vaadin.MenuItemPainter;
-import nz.co.senanque.vaadin.SubmitButtonPainter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,18 +33,21 @@ import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
 
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
+import com.vaadin.ui.Notification;
 
 /**
  * @author Roger Parkinson
  *
  */
-public class AppFactoryImpl implements AppFactory, MessageSourceAware, BeanFactoryAware {
+public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSourceAware {
 	
 	protected transient Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private MessageSourceAccessor m_messageSourceAccessor;
+	private MessageSource m_messageSource;
 	private MaduraSessionManager m_maduraSessionManager;
 	private BeanFactory m_beanFactory;
 
@@ -64,36 +64,50 @@ public class AppFactoryImpl implements AppFactory, MessageSourceAware, BeanFacto
 		final Layout layout = new Layout(m_maduraSessionManager);
 		layout.setBlackboard(blackboard);
 		ret.setComponentContainer(layout);
-		Pizza orderItem = new Pizza();
-		orderItem.setItemType(ItemType.PIZZA);
-		m_maduraSessionManager.getValidationSession().bind(orderItem);
-		layout.setItemDataSource(new BeanItem<OrderItem>(orderItem));
+		Pizza pizza = new Pizza();
+
+		m_maduraSessionManager.getValidationSession().bind(pizza);
+		layout.load(pizza);
+
 		MenuBar menuBar = new MenuBar();
-		final MenuBar.MenuItem edit = menuBar.addItem(m_messageSourceAccessor.getMessage("edit", "Edit"), null);
-		MenuItem menuItem = edit.addItem(m_messageSourceAccessor.getMessage("save", "Save"), new CommandExt(){
+		final MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(m_messageSource);
+		final MenuBar.MenuItem edit = menuBar.addItem(messageSourceAccessor.getMessage("menu.edit", "Edit"), null);
+		MaduraFieldGroup fieldGroup = layout.getFieldGroup();
+
+		CommandExt command = fieldGroup.createMenuItemCommand(new ClickListener(){
 
 			private static final long serialVersionUID = 1L;
-			MenuItemPainter m_menuItemPainter = new SubmitButtonPainter(m_maduraSessionManager);
-			
-			public void menuSelected(MenuItem selectedItem) {
-				layout.save();
-			}
 
-			public MenuItemPainter getPainter() {
-				return m_menuItemPainter;
-			}
-
-			public MaduraSessionManager getMaduraSessionManager() {
-				return m_maduraSessionManager;
+			@Override
+			public void buttonClick(ClickEvent event) {
+				Notification.show(messageSourceAccessor.getMessage("message.clicked.submit"),
+						messageSourceAccessor.getMessage("message.noop"),
+						Notification.Type.HUMANIZED_MESSAGE);
+				
 			}});
-		m_maduraSessionManager.register(menuItem);
-		m_maduraSessionManager.bind(menuItem, layout.getProperties());
+		MenuItem menuItemSave = edit.addItem("menu.save", command);
+        fieldGroup.bind(menuItemSave);
+
+		command = fieldGroup.createMenuItemCommandSubmit(new ClickListener(){
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				Notification.show(messageSourceAccessor.getMessage("message.clicked.cancel"),
+						messageSourceAccessor.getMessage("message.noop"),
+						Notification.Type.HUMANIZED_MESSAGE);
+				
+			}});
+		MenuItem menuItemCancel = edit.addItem("menu.cancel", command);
+        fieldGroup.bind(menuItemCancel);
+
 		ret.setMenuBar(menuBar);
 		return ret;
 	}
 
 	public void setMessageSource(MessageSource messageSource) {
-		m_messageSourceAccessor = new MessageSourceAccessor(messageSource);
+		m_messageSource = messageSource;
 	}
 
 	public MaduraSessionManager getMaduraSessionManager() {

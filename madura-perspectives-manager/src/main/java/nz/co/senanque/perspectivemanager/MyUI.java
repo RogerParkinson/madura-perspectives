@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 
+import nz.co.senanque.madura.bundle.BundleExport;
 import nz.co.senanque.madura.bundle.spring.BundledInterfaceRegistrar;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
@@ -53,7 +54,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Theme("mytheme")
-@Title("Madura Vaadin Demo")
+@Title("Madura Perspectives")
 @Widgetset("com.vaadin.DefaultWidgetSet")
 @SpringUI
 public class MyUI extends UI implements MessageSourceAware {
@@ -64,6 +65,7 @@ public class MyUI extends UI implements MessageSourceAware {
 	@Autowired private PermissionManager m_permissionManager;
 	@Autowired private AboutWindow m_aboutWindow;
 	@Autowired private BundleListenerImpl m_bundleListenerImpl;
+	@Autowired private Blackboard m_blackboard;
 
 	private VerticalLayout mainLayout;
 	private HorizontalLayout bodyLayout;
@@ -77,7 +79,6 @@ public class MyUI extends UI implements MessageSourceAware {
 	private HorizontalLayout headingLayout;
 	private Label titleLabel;
 	private Embedded embedded_1;
-	private Blackboard m_blackboard = new Blackboard();
 	private List<MenuBar.MenuItem> m_added = new ArrayList<MenuBar.MenuItem>();
 	private MessageSource m_messageSource;
 
@@ -97,6 +98,7 @@ public class MyUI extends UI implements MessageSourceAware {
     @EnableVaadin
     @Import(BundledInterfaceRegistrar.class)
     @ComponentScan(basePackages = {
+    		"nz.co.senanque.perspectiveslibrary",
     		"nz.co.senanque.madura.bundle",
     		"nz.co.senanque.vaadin"})	// madura-objects
     @PropertySource("classpath:config.properties")
@@ -115,6 +117,7 @@ public class MyUI extends UI implements MessageSourceAware {
     	}
     	@Bean(name="hints")
     	@UIScope
+    	@BundleExport
     	public Hints getHints() {
     		return new HintsImpl();
     	}
@@ -129,7 +132,7 @@ public class MyUI extends UI implements MessageSourceAware {
     }
     @Override
     protected void init(VaadinRequest vaadinRequest) { // called at session start
-    	
+	
     	final MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(m_messageSource);
     	
     	buildMainLayout(messageSourceAccessor);
@@ -172,7 +175,7 @@ public class MyUI extends UI implements MessageSourceAware {
 				}
 				if (m_app == null)
 				{
-					m_app = subApplication.getAppFactory().createApp(m_blackboard);
+					m_app = subApplication.createApp(m_blackboard);
 				}
 				ApplicationlBodyLayout.addComponent(m_app.getComponentContainer());
 				titleLabel.setValue(subApplication.getDescription());

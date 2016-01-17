@@ -18,6 +18,7 @@ package nz.co.senanque.perspectiveslibrary;
 import nz.co.senanque.madura.bundlemap.BundleVersion;
 
 import org.springframework.context.MessageSource;
+
 import com.vaadin.server.Resource;
 
 public interface SubApplication {
@@ -35,6 +36,9 @@ public interface SubApplication {
 	public MessageSource getMessageSource();
 
 	public void setBundleVersion(BundleVersion bundleVersion);
+	
 	public BundleVersion getBundleVersion();
+	
+	public App createApp(Blackboard blackboard);
 
 }

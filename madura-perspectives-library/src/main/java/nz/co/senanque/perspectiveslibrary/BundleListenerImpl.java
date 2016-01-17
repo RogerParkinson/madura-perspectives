@@ -43,7 +43,7 @@ import org.springframework.context.support.AbstractMessageSource;
  */
 public class BundleListenerImpl implements BundleListener, Serializable
 {
-	private static final long serialVersionUID = 7147632840139484367L;
+	private static final long serialVersionUID = 1L;
 	private Logger m_logger = LoggerFactory.getLogger(this.getClass());
 	
 	private MessageSource m_messageSource;

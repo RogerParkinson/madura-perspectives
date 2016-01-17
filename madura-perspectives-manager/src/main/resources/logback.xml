@@ -7,8 +7,8 @@
 	</appender>
 
 	<logger name="nz.co.senanque.madura.bundle" level="info" />
+	<logger name="nz.co.senanque.madura.bundle.BundleMangerDelegateJar" level="debug" />
 	<logger name="nz.co.senanque.perspectivemanager" level="info" />
-	<logger name="nz.co.senanque.madura.bundle" level="debug" />
 	<logger name="org.springframework.context.support.ResourceBundleMessageSource" level="error" />
 
 	<root level="warn">
