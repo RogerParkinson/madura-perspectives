@@ -319,9 +319,9 @@ public class MyUI extends UI implements MessageSourceAware {
 		bodyLayout.setHeight("-1px");
 		bodyLayout.setMargin(false);
 		
-		// panel_1
-		panel_1 = buildPanel_1(messageSourceAccessor);
-		bodyLayout.addComponent(panel_1);
+//		// panel_1
+//		panel_1 = buildPanel_1(messageSourceAccessor);
+//		bodyLayout.addComponent(panel_1);
 		
 		// panel_2
 		panel_2 = buildPanel_2(messageSourceAccessor);
