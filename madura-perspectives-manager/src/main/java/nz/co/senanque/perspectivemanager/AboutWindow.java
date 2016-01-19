@@ -1,25 +1,15 @@
 package nz.co.senanque.perspectivemanager;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
-import nz.co.senanque.madura.bundle.BundleExport;
 import nz.co.senanque.vaadin.AboutInfo;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.core.type.classreading.MethodMetadataReadingVisitor;
 import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
 
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -43,12 +33,11 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 @UIScope
 @Component("AboutWindow")
-public class AboutWindow extends Window implements MessageSourceAware, BeanFactoryAware {
+public class AboutWindow extends Window implements MessageSourceAware {
 
 	private static final long serialVersionUID = 1L;
 	@Autowired @Qualifier("aboutInfo") private AboutInfo m_aboutInfo;
 	private MessageSource m_messageSource;
-	private DefaultListableBeanFactory m_beanFactory;
 	
 	@PostConstruct
 	public void init() {
@@ -92,11 +81,6 @@ public class AboutWindow extends Window implements MessageSourceAware, BeanFacto
 
 	public void setMessageSource(MessageSource messageSource) {
 		m_messageSource = messageSource;
-	}
-
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		m_beanFactory = (DefaultListableBeanFactory)beanFactory;
 	}
 
 }

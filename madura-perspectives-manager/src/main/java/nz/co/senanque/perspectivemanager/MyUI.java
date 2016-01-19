@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 
 import nz.co.senanque.madura.bundle.BundleExport;
+import nz.co.senanque.madura.bundle.BundleManager;
 import nz.co.senanque.madura.bundle.spring.BundledInterfaceRegistrar;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
@@ -17,6 +18,7 @@ import nz.co.senanque.perspectiveslibrary.SubApplication;
 import nz.co.senanque.vaadin.Hints;
 import nz.co.senanque.vaadin.HintsImpl;
 import nz.co.senanque.vaadin.permissionmanager.PermissionManager;
+import nz.co.senanque.vaadin.permissionmanager.PermissionManagerImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -26,6 +28,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -39,7 +43,6 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.EnableVaadin;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.spring.server.SpringVaadinServlet;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
@@ -65,6 +68,7 @@ public class MyUI extends UI implements MessageSourceAware {
 	@Autowired private PermissionManager m_permissionManager;
 	@Autowired private AboutWindow m_aboutWindow;
 	@Autowired private BundleListenerImpl m_bundleListenerImpl;
+	@Autowired private BundleManager m_bundleManager;
 	@Autowired private Blackboard m_blackboard;
 
 	private VerticalLayout mainLayout;
@@ -100,7 +104,7 @@ public class MyUI extends UI implements MessageSourceAware {
     @ComponentScan(basePackages = {
     		"nz.co.senanque.perspectiveslibrary",
     		"nz.co.senanque.madura.bundle",
-    		"nz.co.senanque.vaadin"})	// madura-objects
+    		"nz.co.senanque.vaadin"})
     @PropertySource("classpath:config.properties")
     public static class MyConfiguration {
     	
@@ -116,10 +120,18 @@ public class MyUI extends UI implements MessageSourceAware {
     		return new PropertySourcesPlaceholderConfigurer();
     	}
     	@Bean(name="hints")
-    	@UIScope
+    	@Scope(value="vaadin-ui", proxyMode = ScopedProxyMode.TARGET_CLASS)
     	@BundleExport
     	public Hints getHints() {
     		return new HintsImpl();
+    	}
+    	@Bean(name="permissionManager")
+    	@Scope(value="vaadin-ui", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    	@BundleExport
+    	public PermissionManager getPermissionManager() {
+    		PermissionManagerImpl ret = new PermissionManagerImpl();
+    		//ret.init();
+    		return ret;
     	}
     	
     	@Bean(name="bundleListener")
@@ -151,7 +163,7 @@ public class MyUI extends UI implements MessageSourceAware {
 			public void menuSelected(MenuItem selectedItem) {
 				for (SubApplication subApplication : m_bundleListenerImpl
 						.getSubApplicationValues()) {
-					subApplication.getBundleVersion().decrement();
+					m_bundleManager.releaseBundle(subApplication.getBundleVersion());
 				}
 				m_permissionManager.close(getUI());
 			}
@@ -160,7 +172,7 @@ public class MyUI extends UI implements MessageSourceAware {
     }
 	private void setupSubApplication(final SubApplication subApplication, final MenuBar.MenuItem file)
 	{
-		subApplication.getBundleVersion().increment();
+		m_bundleManager.reserveBundle(subApplication.getBundleVersion());
 		file.addItem(subApplication.getCaption(), subApplication.getIcon(), new Command() {
 
 			private static final long serialVersionUID = 1L;
@@ -173,6 +185,7 @@ public class MyUI extends UI implements MessageSourceAware {
 					ApplicationlBodyLayout.removeComponent(component);
 					break;
 				}
+				m_bundleManager.setBundle(subApplication.getBundleVersion());
 				if (m_app == null)
 				{
 					m_app = subApplication.createApp(m_blackboard);

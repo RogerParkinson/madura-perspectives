@@ -10,6 +10,7 @@
 	<logger name="nz.co.senanque.madura.bundle.BundleMangerDelegateJar" level="debug" />
 	<logger name="nz.co.senanque.perspectivemanager" level="info" />
 	<logger name="org.springframework.context.support.ResourceBundleMessageSource" level="error" />
+	<logger name="nz.co.senanque.pizzabundle.AppFactoryImpl" level="debug" />
 
 	<root level="warn">
 		<appender-ref ref="STDOUT" />

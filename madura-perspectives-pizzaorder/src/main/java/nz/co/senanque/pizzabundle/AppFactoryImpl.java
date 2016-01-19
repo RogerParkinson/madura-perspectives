@@ -32,7 +32,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
 
-import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar;
@@ -58,8 +57,6 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSour
 	{
 		// Explicitly fetch this bean to ensure it is not instantiated until the session has started.
 		m_maduraSessionManager = m_beanFactory.getBean("maduraSessionManager",MaduraSessionManager.class);
-//		log.debug("found maduraSessionManager {} {}",m_maduraSessionManager.toString(),System.identityHashCode(m_maduraSessionManager));
-//		log.debug("found permissionManager {} {}",m_maduraSessionManager.getPermissionManager().toString(),System.identityHashCode(m_maduraSessionManager.getPermissionManager()));
 		App ret = new App();
 		final Layout layout = new Layout(m_maduraSessionManager);
 		layout.setBlackboard(blackboard);
@@ -80,12 +77,12 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSour
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Notification.show(messageSourceAccessor.getMessage("message.clicked.submit"),
+				Notification.show(messageSourceAccessor.getMessage("message.clicked.cancel"),
 						messageSourceAccessor.getMessage("message.noop"),
 						Notification.Type.HUMANIZED_MESSAGE);
 				
 			}});
-		MenuItem menuItemSave = edit.addItem("menu.save", command);
+		MenuItem menuItemSave = edit.addItem("menu.cancel", command);
         fieldGroup.bind(menuItemSave);
 
 		command = fieldGroup.createMenuItemCommandSubmit(new ClickListener(){
@@ -94,12 +91,12 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSour
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Notification.show(messageSourceAccessor.getMessage("message.clicked.cancel"),
+				Notification.show(messageSourceAccessor.getMessage("message.clicked.submit"),
 						messageSourceAccessor.getMessage("message.noop"),
 						Notification.Type.HUMANIZED_MESSAGE);
 				
 			}});
-		MenuItem menuItemCancel = edit.addItem("menu.cancel", command);
+		MenuItem menuItemCancel = edit.addItem("menu.save", command);
         fieldGroup.bind(menuItemCancel);
 
 		ret.setMenuBar(menuBar);

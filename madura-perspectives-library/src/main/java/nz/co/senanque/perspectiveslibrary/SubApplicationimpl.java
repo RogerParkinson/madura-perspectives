@@ -58,7 +58,7 @@ public class SubApplicationimpl implements SubApplication, Serializable, BeanFac
     }
     
     public App createApp(Blackboard blackboard) {
-    	List<BeanDefinition> beanDefinitionList = nz.co.senanque.madura.bundle.spring.BeanUtils.beansAnnotatedWith(m_beanFactory, BundleExport.class);
+//    	List<BeanDefinition> beanDefinitionList = nz.co.senanque.madura.bundle.spring.BeanUtils.beansAnnotatedWith(m_beanFactory, BundleExport.class);
     	return m_appFactory.createApp(blackboard);
     }
 	/* (non-Javadoc)

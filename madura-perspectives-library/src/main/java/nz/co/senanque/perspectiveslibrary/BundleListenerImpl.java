@@ -36,7 +36,7 @@ import org.springframework.context.support.AbstractMessageSource;
 
 /**
  * 
- * Simple example implementation of a bundle listener
+ * This bundle listener registers new bundled applications as they arrive.
  * 
  * @author Roger Parkinson
  * @version $Revision:$

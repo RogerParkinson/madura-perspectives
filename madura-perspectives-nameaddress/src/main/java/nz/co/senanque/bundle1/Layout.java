@@ -21,6 +21,8 @@ import nz.co.senanque.perspectiveslibrary.BlackboardListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -54,6 +56,15 @@ public class Layout extends VerticalLayout {
 	public Layout() {
 		buildMainLayout();
 		addComponent(mainLayout);
+		m_name.addTextChangeListener(new TextChangeListener(){
+
+			private static final long serialVersionUID = -1L;
+
+			public void textChange(TextChangeEvent event) {
+				m_blackboard.publish("userName", event.getText());
+				
+			}});
+
 	}
 	private VerticalLayout buildMainLayout() {
 		// common part: create layout
