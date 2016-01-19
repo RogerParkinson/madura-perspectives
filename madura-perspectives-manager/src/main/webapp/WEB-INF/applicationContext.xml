@@ -26,11 +26,6 @@
 	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb">
 		<property name="directory" ref="bundlesDir"/>
 		<property name="time" value="10000"/>
-		<property name="inheritableBeans">
-			<map>
-				<entry key="bundleManager" value-ref="bundleManager"/>
-			</map>
-		</property>
 	</bean>
  -->
 
@@ -38,12 +33,6 @@
  	This bundle manager configuration is suitable for demos. It locates a fixed set of bundles from a directory in the war file (WEB-INF/bundles)
 	Useful for demos but not for production because you cannot dynamically update the bundles.
  -->	
-	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb">
-		<property name="exportedBeans">
-			<map>
-				<entry key="bundleManager" value-ref="bundleManager"/>
-			</map>
-		</property>
-	</bean>	
+	<bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerWeb"/>
 
 </beans>
