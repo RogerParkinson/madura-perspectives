@@ -33,14 +33,17 @@
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
 			<artifactId>madura-bundle</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
 			<artifactId>madura-vaadin</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>nz.co.senanque</groupId>
 			<artifactId>madura-perspectives-library</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
