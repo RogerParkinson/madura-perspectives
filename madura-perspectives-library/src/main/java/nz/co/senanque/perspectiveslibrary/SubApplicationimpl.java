@@ -16,15 +16,9 @@
 package nz.co.senanque.perspectiveslibrary;
 
 import java.io.Serializable;
-import java.util.List;
 
-import nz.co.senanque.madura.bundle.BundleExport;
 import nz.co.senanque.madura.bundlemap.BundleVersion;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 
@@ -40,17 +34,15 @@ import com.vaadin.server.Resource;
  * @author Roger Parkinson
  *
  */
-public class SubApplicationimpl implements SubApplication, Serializable, BeanFactoryAware  {
+public class SubApplicationimpl implements SubApplication, Serializable  {
 	
 	private static final long serialVersionUID = 1L;
 	private String m_caption;
 	private String m_description;
-	private Resource m_icon;
 	private MessageSource m_messageSource;
 	private AppFactory m_appFactory;
 	private String m_version;
 	private BundleVersion m_bundleVersion;
-	private BeanFactory m_beanFactory;
 
     public void setMessageSource(MessageSource messageSource)
     {
@@ -58,7 +50,6 @@ public class SubApplicationimpl implements SubApplication, Serializable, BeanFac
     }
     
     public App createApp(Blackboard blackboard) {
-//    	List<BeanDefinition> beanDefinitionList = nz.co.senanque.madura.bundle.spring.BeanUtils.beansAnnotatedWith(m_beanFactory, BundleExport.class);
     	return m_appFactory.createApp(blackboard);
     }
 	/* (non-Javadoc)
@@ -109,10 +100,10 @@ public class SubApplicationimpl implements SubApplication, Serializable, BeanFac
 	public void setBundleVersion(BundleVersion bundleVersion) {
 		m_bundleVersion = bundleVersion;
 	}
-	@Override
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-		m_beanFactory = beanFactory;
-		
-	}
+//	@Override
+//	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+//		m_beanFactory = beanFactory;
+//		
+//	}
 
 }

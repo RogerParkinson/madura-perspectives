@@ -57,8 +57,5 @@ public class App {
 	public List<MenuItem> getMenuPainters() {
 		return null;
 	}
-	
-	
-
 
 }

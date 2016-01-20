@@ -73,6 +73,7 @@
   	<module>madura-perspectives-nameaddress</module>
   	<module>madura-perspectives-manager</module>
   	<module>madura-perspectives-pizzaorder</module>
+  	<module>madura-perspectives-bmi</module>
   </modules>
 	<dependencyManagement>
 		<dependencies>
@@ -85,6 +86,11 @@
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin</artifactId>
 	            <version>${madura.vaadin.support.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>nz.co.senanque</groupId>
+				<artifactId>madura-vaadin-directed</artifactId>
+				<version>${madura.vaadin.support.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>

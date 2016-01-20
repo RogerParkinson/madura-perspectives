@@ -47,6 +47,10 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 			<artifactId>madura-rules</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>nz.co.senanque</groupId>
+			<artifactId>madura-vaadin-directed</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
