@@ -212,6 +212,43 @@ public class AppFactoryImpl implements AppFactory {
         on the name field. When the value changes it calls the blackboard to publish the new value with an associated name 'userName'. The UserName sub application adds a listener to the blackboard
         and when that listener is called it updates its own name field. </p>
         </h1>
+        <h1 t="Bean Scopes">
+        <p>If you looked at the VaadinSupport<referenceLink t="MaduraVaadinSupport"/> demos you have seen the permission manager bean defined in
+        the XML context file with scope 'vaadin-ui'. There is a note in the docs for that project pointing out that this could be done just
+        as easily as a <courier>@Bean</courier> like this:</p>
+        <code><![CDATA[
+@Bean(name="permissionManager")
+@UIScope
+public PermissionManager getPermissionManager() {
+	PermissionManagerImpl ret = new PermissionManagerImpl();
+	return ret;
+	}
+        ]]></code>
+		<p>But in this project we do something different. The permission manager bean is defined like this:</p>
+        <code><![CDATA[
+@Bean(name="permissionManager")
+@Scope(value="vaadin-ui", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@BundleExport
+public PermissionManager getPermissionManager() {
+	PermissionManagerImpl ret = new PermissionManagerImpl();
+	return ret;
+}
+        ]]></code>
+        <p>Why the difference? In the earlier demos the permission manager bean needed to be instantiated per session and the <courier>@UIScope</courier>
+        and 'vaadin-ui' settings achieve that. In Perspectives we need the same per session instantiation but we also need to export the
+        permission manager bean to the sub applications so that they can query it for permissions and possibly the current user name. That
+        explains the <courier>@BundleExport</courier>, but why has <courier>@UIScope</courier> changed to that more complex <courier>@Scope</courier>
+        setting? The answer is that the <courier>@Scope</courier> setting is almost the same as <courier>@UIScope</courier>. Both effectively declare
+        a scope of 'vaadin-ui' for this bean, which ensures it is a session level bean. But a simple <courier>@UIScope</courier> for not tell Spring enough
+        about how we need this bean proxied, so we've added the proxyMode setting. It is vital the bean is proxied so that it can be exported correctly.
+        But this only applies to session beans. Singletons do not need special proxying, nor to they need any scope setting.</p>
+        <p>The proxying is needed because it wraps a mechanism for finding the bean that applies to this session. The sub application calls the bean
+        and the proxy manages locating the right bean and then calls it on behalf of the calling code.</p>
+        <p>The same applies to the hints bean which is also a session bean exported to the sub applications.</p>
+        <p>If you do want to create <courier>@UIScope</courier> beans in a sub application, as opposed to creating them in the manager and exporting them,
+        you can. These are switched internally to 'bundle' scope. That means they are instantiated once per session/bundle, ensuring that two beans in two different
+        bundles with the same name are not confused even if they belong to the same session.</p>
+        </h1>
 		<a1 t="License">
 			<p>The code specific to madura-perspectives is licensed under the Apache License 2.0 <referenceLink t="Apache Licence 2.0"/>.</p>
 			<p>The dependent products have compatible licenses specified in their pom files. Madura Rules (optional) has a dual
