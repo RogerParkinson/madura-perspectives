@@ -130,7 +130,6 @@ public class MyUI extends UI implements MessageSourceAware {
     	@BundleExport
     	public PermissionManager getPermissionManager() {
     		PermissionManagerImpl ret = new PermissionManagerImpl();
-    		//ret.init();
     		return ret;
     	}
     	

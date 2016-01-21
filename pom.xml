@@ -18,6 +18,7 @@
 		<pdf>target/${project.artifactId}-${project.version}.pdf</pdf>
 		<spring.framework.version>4.2.3.RELEASE</spring.framework.version>
 		<logback.version>1.0.3</logback.version>
+		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<madura.vaadin.support.version>3.0.0-SNAPSHOT</madura.vaadin.support.version>
 		<madura.rules.version>3.0.0-SNAPSHOT</madura.rules.version>
 		<madura.rules.maven.plugin.version>1.2.3-SNAPSHOT</madura.rules.maven.plugin.version>

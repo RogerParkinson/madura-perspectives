@@ -106,6 +106,12 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 					</execution>
 				</executions>
 			</plugin>
+			<!-- The Jetty plugin allows us to easily test the development build by
+				running jetty:run on the command line. -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>

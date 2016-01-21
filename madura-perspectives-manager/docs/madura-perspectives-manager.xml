@@ -54,11 +54,11 @@
 		<p>There is more documentation about using Vaadin in this way in <referenceLink t="MaduraVaadinSupport"/></p>
 		</h1>
         <h1 t="Running the Demo">
-		<p>The first thing you need to do is check out the project. See the Readme.md file in <referenceLink t="madura-perspectives"/> for details.</p>
-		<p>This is a maven project with a default goal so make sure you have maven (v2) installed, type <courier>mvn</courier> and the war file
-		will be built. You should be running Java 7 or later.</p>
-		<p>You will need an application server. We tested this with Tomcat V7, but any application server you are comfortable with
-		should be just fine. It also runs on VMWare's cloud server, and probably most others.</p>
+		<p>The first thing you need to do is check out the project from <referenceLink t="madura-perspectives"/>.</p>
+		<p>To build use: mvn install</p>
+		<p>To run with Jetty use: mvn jetty:run and open http://localhost:8080/. You can also run them with Eclipse WTP. We tested with Tomcat 7.</p>
+		<p>To login the user/password is always admin/admin, you can also use user/user</p>
+
 		<p>For the purposes of keeping the demo setup simple the bundles it uses are embedded in the war file, that means you don't have
 		to mess about telling your application server what directory to sweep to find them. The configuration to support the more flexible use is in the
 		<courier>applicationContext.xml</courier> file, commented out, near the bottom. We will look at those options in <sectionLink t="Configuring for Production"/></p>
@@ -67,7 +67,6 @@
         do understand that in this demo the pluggable applications are fixed and you cannot switch them in and out and add your own. When you build it yourself you can
         do all of that.</p>
          -->
-        <p>To run the demo the user/password is admin/admin.</p>
 		<img width="15cm" href="images/MaduraPerspectiveDemo.png">Madura Perspective Demo</img>
 		<p>What <figureLink t="Madura Perspective Demo"/> shows is the initial display when a user logs into the main application.</p>
 		<p>Worth noticing at this point is that there is not much there, but there is a list of sub applications on the left hand side. There
@@ -90,8 +89,12 @@
 		objects and rules as the pizza order demo. The point, though, is that this kind of functionality can be added to a sub application
 		when we want. You might also notice that the menu has an extra entry. This was contributed by the Pizza Order sub application. Menu
 		items appear and disappear as different sub applications are selected.</p>
+		<img width="15cm" href="images/BMI.png">BMI</img>
+		<p>This is another sub application that uses Madura Objects and Madura Rules to drive the UI, in particular it uses the directed
+		questioning feature of Madura Rules to drive single field prompts for the data points needed. The rules drive what prompts are
+		used and, apart from the BMI button to kick it off it needs no actual UI design.</p>
 		<p>Now let's take a look at what these sub applications really are.</p>
-		<p>Each sub application is a Madura Bundle, which means it is a jar file with some extra bits, including a local Spring beans file.
+		<p>Each sub application is a Madura Bundle, which means it is a jar file with some extra bits, including a local Spring beans configuration.
 		Each sub application contributes:</p>
 		<list>
 		<le>A name. This is used to create the link on the left.</le>
@@ -110,6 +113,7 @@
 		can react to the change or ignore it.</p>
         </h1>
         <h1 t="Configuring for Production">
+        <p>As mentioned earlier this demo has the bundles embedded in the war file, which is fine for a demo but it makes the whole concept a bit weak.</p>
         <p>A production configuration would dispense with the bundles embedded in the war file and use an external directory. To configure this you need
         to tell your application server where that directory is.</p>
 		<code><![CDATA[
@@ -124,22 +128,91 @@
         The only difference between the two is that this one has the directory and time properties set. Just above it a JNDI name is defined. Now, you
         could simply hard code your directory in there and dispense with the JNDI name but in a production system you probably want to use JNDI so that you
         can change it without having to rebuild the application.</p>
-        <p>Also uncomment the last env-entry in the web.xml file.</p>
         <p>The next step is to tell your application server what value to give that JNDI name. This depends on your application server. For Tomcat you
         can just edit it into your <courier>context.xml</courier> file like this:</p>
 		<code><![CDATA[
 <Environment name="BundlesDir" value="MY_DIRECTORY/bundles" type="java.lang.String" override="true"/>
 		]]></code>
-        <p>Finally you want to actually add some bundles to that directory. There are three bundle projects you can use right away, these are the
+        <p>Finally you want to actually add some bundles to that directory. There are four bundle projects you can use right away, these are the
         ones in the demo:</p>
         <list>
-        <le>madura-pizzaorder-bundle</le>
-        <le>madura-demo-bundle1</le>
-        <le>madura-demo-bundle2</le>
+        <le>madura-perspectives-name</le>
+        <le>madura-perspectives-nameaddress</le>
+        <le>madura-perspectives-pizzaorder</le>
+        <le>madura-perspectives-bmi</le>
         </list>
         <p>These are all maven sub-projects and they are automatically added to the <courier>WEB-INF/bundles</courier> in the madura-perspectives-manager project. You
         can configure a sweep directory as described above and deploy your own bundle(s) to that. As long as you keep changing your bundle's version you can change, build 
         and deploy it without restarting the main application, though you do have to log out and back in to see the new bundle you added.</p> 
+        </h1>
+        <h1 t="What Does a Sub Application look like?">
+        <p>A sub application is a jar file, more specifically it is a Madura Bundle<referenceLink t="MaduraBundles"/> which means it has some specific items in the jar file.
+        The first thing to look at is the <courier>MANIFEST.MF</courier> file. Apart from the usual entries this has:</p>
+		<code><![CDATA[
+Bundle-Name: Name
+Bundle-Version: 3.0.0-SNAPSHOT
+Bundle-Context: name-spring.xml
+Bundle-Activator: nz.co.senanque.madura.bundle.BundleRootImpl
+Bundle-Description: user.details
+		]]></code>
+        <p>These are the usual entries needed for Madura Bundles. Two things to point out especially are that the <courier>Bundle-Context</courier> points to a Spring context file
+        in the top directory, and the <courier>Bundle-Description</courier> refers to an entry in the resource bundle and the appropriate language resource will be used to turn it into a displayable
+        description string and used in the UI.</p>
+        <p>The context file should look omething like this:</p>
+		<code><![CDATA[
+<bean id="PropertySourcesPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
+	
+<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">
+	<constructor-arg value="${bundle.name}"/>
+</bean>
+<bean id="SubApplication" class="nz.co.senanque.perspectiveslibrary.SubApplicationimpl">
+	<property name="version" value="${Bundle-Version}"/>
+	<property name="caption" value="${Bundle-Name}"/>
+	<property name="description" value="${Bundle-Description}"/>
+	<property name="appFactory">
+		<bean class="nz.co.senanque.bundle2.AppFactoryImpl">
+		</bean>
+	</property>
+	<property name="messageSource">
+		<bean class="org.springframework.context.support.ResourceBundleMessageSource">
+			<property name="basenames">
+				<list>
+					<value>messages</value>
+				</list>
+			</property>
+		</bean>
+	</property>
+</bean>
+		]]></code>
+		<p>Almost all of this is creating the <courier>SubApplication</courier> bean and this is just about all boilerplate code. The one thing specific to this
+		sub application is the <courier>appFactory</courier> field value, the class name of the appFactory for this application. We also defined a bean to hold the
+		resource bundle. That appFactory class implements <courier>nz.co.senanque.perspectiveslibrary.AppFactory</courier>. The simplest looks like this:</p>
+		<code><![CDATA[
+public class AppFactoryImpl implements AppFactory {
+	
+	@Override
+	public App createApp(Blackboard blackboard)
+	{
+		App ret = new App();
+		final Layout layout = new Layout();
+		layout.setBlackboard(blackboard);
+		ret.setComponentContainer(layout);
+		return ret;
+	}
+}
+		]]></code>
+		<p>Its main job is to create the <courier>layout</courier> which is always a Vaadin component, usually a <courier>VerticalLayout</courier>, but if you need to manipulate
+		the main menu or start a Madura session you do it here. The <courier>layout</courier> creates all the visible controls and adds the blackboard listeners to them (if any).</p>
+		<p>To add menu items you just create a <courier>com.vaadin.ui.MenuBar</courier> and add whatever menu items you want to that. Then use the <courier>App.setMenuBar()</courier>
+		to set your menu bar into the returned app. You only need the <emph>extra</emph> entries in your menu bar, you don't need to re-add the standard ones.</p>
+        </h1>
+        <h1 t="Blackboard">
+        <p>The blackboard mechanism is a simple publish-subscribe mechanism to allow one sub application to publish something and the others to subscribe to that message, or to ignore it.
+        You can see this working by running the demo and picking the File/User option on the menu. Enter a value into the Name field and then pick File/Name to go to the Name sub applicaiton.
+        You should see the value you typed into the other sub application appear in this one. So how did that happen?</p>
+        <p>First notice that in both sub applications the <courier>layout</courier> implements a <courier>setBlackboard()</courier> method. In the User sub application there is a <courier>TextChangeListener</courier>
+        on the name field. When the value changes it calls the blackboard to publish the new value with an associated name 'userName'. The UserName sub application adds a listener to the blackboard
+        and when that listener is called it updates its own name field. </p>
         </h1>
 		<a1 t="License">
 			<p>The code specific to madura-perspectives is licensed under the Apache License 2.0 <referenceLink t="Apache Licence 2.0"/>.</p>
