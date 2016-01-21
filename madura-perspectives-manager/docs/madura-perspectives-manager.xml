@@ -8,15 +8,13 @@
 		<Revision>$Revision: 1$</Revision>
 		<image>logo.jpg</image>
 		<references>
-			<reference t="MaduraObjects" url="www.madurasoftware.com/home/madura-objects"/>
-			<reference t="MaduraRules" url="www.madurasoftware.com/home/madura-rules"/>
+			<reference t="Madura Objects" url="www.madurasoftware.com/home/madura-objects"/>
+			<reference t="Madura Rules" url="www.madurasoftware.com/home/madura-rules"/>
 			<reference t="MaduraVaadinSupport" url="https://github.com/RogerParkinson/MaduraVaadinSupport"/>
 			<reference t="MaduraBundles" url="https://github.com/RogerParkinson/madura-bundles"/>
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
-			<reference t="Spring-Security" url="http://static.springframework.org/spring-security/site/"/>			
 			<reference t="madura-perspectives" url="https://github.com/RogerParkinson/madura-perspectives"/>
-			<reference t="LogbackConfiguration" url="http://logback.qos.ch/manual/contextSelector.html"/>
 		</references>
 	</title>
 	<body>
@@ -85,7 +83,7 @@
 		current sub application. If we now click the <courier>pizza</courier> option we see the 
 		<courier>Pizza Order</courier> UI.</p>
 		<img width="15cm" href="images/PizzaOrder.png">Pizza Order</img>
-		<p>This sub application uses Madura Objects and Madura Rules to drive the UI, so is a bit more interesting. It uses the same
+		<p>This sub application uses Madura Objects<referenceLink t="Madura Objects"/> and Madura Rules<referenceLink t="Madura Rules"/> to drive the UI, so is a bit more interesting. It uses the same
 		objects and rules as the pizza order demo. The point, though, is that this kind of functionality can be added to a sub application
 		when we want. You might also notice that the menu has an extra entry. This was contributed by the Pizza Order sub application. Menu
 		items appear and disappear as different sub applications are selected.</p>
@@ -94,7 +92,7 @@
 		questioning feature of Madura Rules to drive single field prompts for the data points needed. The rules drive what prompts are
 		used and, apart from the BMI button to kick it off it needs no actual UI design.</p>
 		<p>Now let's take a look at what these sub applications really are.</p>
-		<p>Each sub application is a Madura Bundle, which means it is a jar file with some extra bits, including a local Spring beans configuration.
+		<p>Each sub application is a Madura Bundle, which means it is a jar file with some extra bits, including a local Spring<referenceLink t="Spring Framework"/> beans configuration.
 		Each sub application contributes:</p>
 		<list>
 		<le>A name. This is used to create the link on the left.</le>
@@ -227,6 +225,9 @@ public class AppFactoryImpl implements AppFactory {
 		</tr>
 		<tr>
 			<td>Implemented bundle scope (from new version of Madura Bundles)</td>
+		</tr>
+		<tr>
+			<td>Reworked to use the new configuration mechanisms and Vaadin 7</td>
 		</tr>
 		<tr>
 			<td>2.3.1</td>
