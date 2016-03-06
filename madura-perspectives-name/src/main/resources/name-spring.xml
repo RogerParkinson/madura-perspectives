@@ -21,11 +21,6 @@ limitations under the License.
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
-<!-- 
-	<bean id="hints" class="nz.co.senanque.vaadinsupport.HintsImpl" scope="session">
-		<property name="forceImmediate" value="true"/>
-	</bean>
- -->
  	<bean id="PropertySourcesPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
  	
 	<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">
@@ -37,7 +32,6 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<property name="description" value="${Bundle-Description}"/>
 		<property name="appFactory">
 			<bean class="nz.co.senanque.bundle2.AppFactoryImpl">
-				<!-- <property name="testSessionBean" ref="testSessionBean"/> -->
 			</bean>
 		</property>
 		<property name="messageSource">
@@ -50,6 +44,5 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			</bean>
 		</property>
 	</bean>
-	<!--<bean id="testSessionBean" class="nz.co.senanque.test.TestSessionBean" scope="session"/>-->
 	
 </beans>
