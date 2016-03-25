@@ -8,9 +8,9 @@
 		<Revision>$Revision: 1$</Revision>
 		<image>logo.jpg</image>
 		<references>
-			<reference t="Madura Objects" url="www.madurasoftware.com/home/madura-objects"/>
-			<reference t="Madura Rules" url="www.madurasoftware.com/home/madura-rules"/>
-			<reference t="MaduraVaadinSupport" url="https://github.com/RogerParkinson/MaduraVaadinSupport"/>
+			<reference t="Madura Objects" url="https://github.com/RogerParkinson/madura-objects-parent"/>
+			<reference t="Madura Rules" url="https://github.com/RogerParkinson/madura-objects-parent/tree/master/madura-rules"/>
+			<reference t="MaduraVaadinSupport" url="https://github.com/RogerParkinson/madura-bundles"/>
 			<reference t="MaduraBundles" url="https://github.com/RogerParkinson/madura-bundles"/>
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
@@ -148,7 +148,7 @@
         The first thing to look at is the <courier>MANIFEST.MF</courier> file. Apart from the usual entries this has:</p>
 		<code><![CDATA[
 Bundle-Name: Name
-Bundle-Version: 3.0.0-SNAPSHOT
+Bundle-Version: 3.0.0
 Bundle-Context: name-spring.xml
 Bundle-Activator: nz.co.senanque.madura.bundle.BundleRootImpl
 Bundle-Description: user.details
