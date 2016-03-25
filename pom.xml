@@ -7,7 +7,7 @@
   </parent>
   <groupId>nz.co.senanque</groupId>
   <artifactId>madura-perspectives</artifactId>
-  <version>3.0.0-SNAPSHOT</version>
+  <version>3.0.0</version>
   <packaging>pom</packaging>
   <name>madura-perspectives</name>
   <description>madura-perspectives</description>
@@ -86,12 +86,12 @@
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin</artifactId>
-	            <version>${madura.vaadin.support.version}</version>
+	            <version>3.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin-directed</artifactId>
-				<version>${madura.vaadin.support.version}</version>
+				<version>3.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
@@ -101,7 +101,7 @@
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-rules</artifactId>
-				<version>${madura.objects.version}</version>
+				<version>3.0.0</version>
 			</dependency>
 
 			<dependency>
@@ -122,7 +122,7 @@
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-bundle</artifactId>
-				<version>4.2.0-SNAPSHOT</version>
+				<version>4.2.0</version>
 			</dependency>
 
 			<dependency>
@@ -315,12 +315,12 @@
 	    		<plugin>
 					<groupId>nz.co.senanque</groupId>
 					<artifactId>madura-rules-maven-plugin</artifactId>
-					<version>${madura.objects.version}</version>
+					<version>3.0.0</version>
 				</plugin>
 				<plugin>
 					<groupId>nz.co.senanque</groupId>
 					<artifactId>madura-objects-maven-plugin</artifactId>
-					<version>${madura.objects.version}</version>
+					<version>3.0.0</version>
 				</plugin>
 			      <plugin>
 			        <groupId>org.eclipse.m2e</groupId>
@@ -345,7 +345,7 @@
 									</goals>
 								</pluginExecutionFilter>
 								<action>
-									<ignore></ignore>
+									<ignore />
 								</action>
 							</pluginExecution>
 							<pluginExecution>
@@ -364,7 +364,7 @@
 									</goals>
 								</pluginExecutionFilter>
 								<action>
-									<ignore></ignore>
+									<ignore />
 								</action>
 							</pluginExecution>
 							<pluginExecution>
@@ -383,7 +383,7 @@
 									</goals>
 								</pluginExecutionFilter>
 								<action>
-									<ignore></ignore>
+									<ignore />
 								</action>
 							</pluginExecution>
 
