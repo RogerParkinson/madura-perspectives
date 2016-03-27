@@ -44,8 +44,9 @@ public class Layout extends VerticalLayout {
     public MaduraSessionManager getMaduraSessionManager() {
 		return m_maduraSessionManager;
 	}
-	public Layout(MaduraSessionManager maduraSessionManager) {
+	public Layout(MaduraSessionManager maduraSessionManager,MaduraFieldGroup fieldGroup) {
 		m_maduraSessionManager = maduraSessionManager;
+		m_fieldGroup = fieldGroup;
 		buildMainLayout();
 		addComponent(mainLayout);
 	}
@@ -68,7 +69,6 @@ public class Layout extends VerticalLayout {
 		m_panel.removeAllComponents();
 		getMaduraSessionManager().getValidationSession().bind(pizza);
     	BeanItem<Pizza> beanItem = new BeanItem<Pizza>(pizza);
-    	m_fieldGroup =getMaduraSessionManager().createMaduraFieldGroup();
     	m_fieldGroup.buildAndBind(m_panel, fieldList, beanItem);  	
 	}
 	public void setItemDataSource(BeanItem<Pizza> beanItem) {

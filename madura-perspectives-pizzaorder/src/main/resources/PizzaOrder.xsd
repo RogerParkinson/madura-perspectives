@@ -125,6 +125,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="weightKilos" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>
@@ -135,6 +136,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="weightPounds" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>
@@ -155,6 +157,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="heightMetric" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>
@@ -165,6 +168,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="heightInches"/>
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>
@@ -175,6 +179,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="heightFeet" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>
@@ -185,6 +190,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="BodyMassIndex" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>

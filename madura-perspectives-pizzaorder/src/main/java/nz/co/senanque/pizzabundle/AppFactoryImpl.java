@@ -58,18 +58,16 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSour
 		// Explicitly fetch this bean to ensure it is not instantiated until the session has started.
 		m_maduraSessionManager = m_beanFactory.getBean("maduraSessionManager",MaduraSessionManager.class);
 		App ret = new App();
-		final Layout layout = new Layout(m_maduraSessionManager);
+		MaduraFieldGroup fieldGroup = getMaduraSessionManager().createMaduraFieldGroup();
+		final Layout layout = new Layout(m_maduraSessionManager,fieldGroup);
 		layout.setBlackboard(blackboard);
 		ret.setComponentContainer(layout);
 		Pizza pizza = new Pizza();
 
 		m_maduraSessionManager.getValidationSession().bind(pizza);
-		layout.load(pizza);
-
 		MenuBar menuBar = new MenuBar();
 		final MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(m_messageSource);
 		final MenuBar.MenuItem edit = menuBar.addItem(messageSourceAccessor.getMessage("menu.edit", "Edit"), null);
-		MaduraFieldGroup fieldGroup = layout.getFieldGroup();
 
 		CommandExt command = fieldGroup.createMenuItemCommand(new ClickListener(){
 
@@ -100,6 +98,9 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSour
         fieldGroup.bind(menuItemCancel);
 
 		ret.setMenuBar(menuBar);
+
+		layout.load(pizza);
+
 		return ret;
 	}
 
