@@ -7,7 +7,7 @@
   </parent>
   <groupId>nz.co.senanque</groupId>
   <artifactId>madura-perspectives</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>madura-perspectives</name>
   <description>madura-perspectives</description>
@@ -19,10 +19,6 @@
 		<spring.framework.version>4.2.3.RELEASE</spring.framework.version>
 		<logback.version>1.0.3</logback.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
-		<madura.vaadin.support.version>3.0.0-SNAPSHOT</madura.vaadin.support.version>
-		<madura.rules.version>3.0.0-SNAPSHOT</madura.rules.version>
-		<madura.rules.maven.plugin.version>1.2.3-SNAPSHOT</madura.rules.maven.plugin.version>
-		<madura.objects.version>3.0.0-SNAPSHOT</madura.objects.version>
 		<slf4j.version>1.7.5</slf4j.version>
    		<timestamp>${maven.build.timestamp}</timestamp>
    		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
@@ -81,17 +77,17 @@
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-login</artifactId>
-				<version>${madura.vaadin.support.version}</version>
+				<version>3.1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin</artifactId>
-	            <version>3.0.0</version>
+	            <version>3.1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin-directed</artifactId>
-				<version>3.0.0</version>
+				<version>3.1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
