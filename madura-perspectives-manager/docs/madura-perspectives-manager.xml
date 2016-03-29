@@ -10,11 +10,12 @@
 		<references>
 			<reference t="Madura Objects" url="https://github.com/RogerParkinson/madura-objects-parent"/>
 			<reference t="Madura Rules" url="https://github.com/RogerParkinson/madura-objects-parent/tree/master/madura-rules"/>
-			<reference t="MaduraVaadinSupport" url="https://github.com/RogerParkinson/madura-bundles"/>
 			<reference t="MaduraBundles" url="https://github.com/RogerParkinson/madura-bundles"/>
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
 			<reference t="madura-perspectives" url="https://github.com/RogerParkinson/madura-perspectives"/>
+			<reference t="madura-perspectives-online" url="http://perspectives-madura.rhcloud.com/"/>
+			
 		</references>
 	</title>
 	<body>
@@ -49,9 +50,10 @@
 		</list>
 		<p>The Manager uses Vaadin<referenceLink t="Vaadin"/> and the perspective applications must use Vaadin to deliver their UI. There is no restriction on
 		what parts of Vaadin the perspective applications can use.</p>
-		<p>There is more documentation about using Vaadin in this way in <referenceLink t="MaduraVaadinSupport"/></p>
 		</h1>
         <h1 t="Running the Demo">
+        <p>There is an on-line demo of the project here: <referenceLink t="madura-perspectives-online"/>. If you use that you can skip building it and
+        running it locally.</p>
 		<p>The first thing you need to do is check out the project from <referenceLink t="madura-perspectives"/>.</p>
 		<p>To build use: mvn install</p>
 		<p>To run with Jetty use: mvn jetty:run and open http://localhost:8080/. You can also run them with Eclipse WTP. We tested with Tomcat 7.</p>
@@ -257,6 +259,18 @@ public PermissionManager getPermissionManager() {
 		<a1 t="Release Notes">
 		<table width="12cm">
 			<tw>12cm</tw>
+		<tr>
+			<td>3.1.0</td>
+		</tr>
+		<tr>
+			<td>Updated docs and deployed demo.</td>
+		</tr>
+		<tr>
+			<td>3.0.0</td>
+		</tr>
+		<tr>
+			<td>Updated underlying libraries and migrated to using FieldGroups rather than Forms in the samples.</td>
+		</tr>
 		<tr>
 			<td>2.4.0</td>
 		</tr>

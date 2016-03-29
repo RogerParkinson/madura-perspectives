@@ -10,7 +10,7 @@ Sub-applications can be added dynamically while the application is running. They
 The framework s easily customisable using Vaadin's facilities (CSS etc). The CSS definitions are, of course, shared across
 all of the sub-applications so you get a consistent look and feel.
 
-If you want to try this out quickly there is an [on line demo](http://perspectivesmanager-madura.rhcloud.com/)
+If you want to try this out quickly there is an [on line demo](http://perspectives-madura.rhcloud.com/)
 
 Build this using maven clean package. You will find the following sub projects:
 
