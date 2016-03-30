@@ -3,7 +3,7 @@
   <parent>
     <groupId>nz.co.senanque</groupId>
     <artifactId>madura-perspectives</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.1.0</version>
   </parent>
   <artifactId>madura-perspectives-manager</artifactId>
   <packaging>war</packaging>
@@ -194,7 +194,7 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
