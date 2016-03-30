@@ -18,6 +18,8 @@
 		<pdf>target/${project.artifactId}-${project.version}.pdf</pdf>
 		<spring.framework.version>4.2.3.RELEASE</spring.framework.version>
 		<logback.version>1.0.3</logback.version>
+		<vaadin.version>7.5.6</vaadin.version>
+		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<slf4j.version>1.7.5</slf4j.version>
    		<timestamp>${maven.build.timestamp}</timestamp>
