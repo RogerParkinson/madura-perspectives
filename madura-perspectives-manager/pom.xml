@@ -71,7 +71,7 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 			<plugin>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>maduradocs</artifactId>
-				<version>6.2.0</version>
+				<version>6.2.1</version>
 				<executions>
 					<execution>
 						<goals>
