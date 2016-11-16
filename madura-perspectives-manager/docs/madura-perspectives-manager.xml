@@ -14,7 +14,7 @@
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
 			<reference t="madura-perspectives" url="https://github.com/RogerParkinson/madura-perspectives"/>
-			<reference t="madura-perspectives-online" url="http://perspectives-madura.rhcloud.com/"/>
+			<reference t="madura-perspectives-online" url="http://demos-madura.rhcloud.com/madura-perspectives/"/>
 			
 		</references>
 	</title>
