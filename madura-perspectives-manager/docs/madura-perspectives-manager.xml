@@ -260,6 +260,12 @@ public PermissionManager getPermissionManager() {
 		<table width="12cm">
 			<tw>12cm</tw>
 		<tr>
+			<td>3.2.0</td>
+		</tr>
+		<tr>
+			<td>Moved to Java 1.8.</td>
+		</tr>
+		<tr>
 			<td>3.1.0</td>
 		</tr>
 		<tr>
