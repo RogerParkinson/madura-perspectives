@@ -14,7 +14,7 @@
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
 			<reference t="madura-perspectives" url="https://github.com/RogerParkinson/madura-perspectives"/>
-			<reference t="madura-perspectives-online" url="http://demos-madura.rhcloud.com/madura-perspectives/"/>
+			<reference t="madura-perspectives-online" url="http://demos-madura.rhcloud.com/madura-perspectives-manager/"/>
 			
 		</references>
 	</title>
@@ -259,6 +259,15 @@ public PermissionManager getPermissionManager() {
 		<a1 t="Release Notes">
 		<table width="12cm">
 			<tw>12cm</tw>
+		<tr>
+			<td>3.2.1</td>
+		</tr>
+		<tr>
+			<td>Documentation changes.</td>
+		</tr>
+		<tr>
+			<td>Updated dependency version for madura-vaadin.</td>
+		</tr>
 		<tr>
 			<td>3.2.0</td>
 		</tr>
