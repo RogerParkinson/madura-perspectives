@@ -260,6 +260,12 @@ public PermissionManager getPermissionManager() {
 		<table width="12cm">
 			<tw>12cm</tw>
 		<tr>
+			<td>3.2.2</td>
+		</tr>
+		<tr>
+			<td>Updated dependencies.</td>
+		</tr>
+		<tr>
 			<td>3.2.1</td>
 		</tr>
 		<tr>
