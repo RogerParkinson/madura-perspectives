@@ -117,22 +117,14 @@
         <p>A production configuration would dispense with the bundles embedded in the war file and use an external directory. To configure this you need
         to tell your application server where that directory is.</p>
 		<code><![CDATA[
-<jee:jndi-lookup id="bundlesDir" jndi-name="java:/comp/env/BundlesDir" expected-type="java.lang.String" />
 <bean id="bundleManager" class="nz.co.senanque.madura.bundle.BundleManagerImpl">
-	<property name="directory" ref="bundlesDir"/>
-	<property name="time" value="10000"/>
+	<property name="directory" value="${bundlesDir}"/>
 </bean>
 		]]></code>
         <p>You will find the above configuration in <courier>applicationContext.xml</courier> just above the bundleManager that is used by default, which you
         should remove, of course, because you only want one of them.
-        The only difference between the two is that this one has the directory and time properties set. Just above it a JNDI name is defined. Now, you
-        could simply hard code your directory in there and dispense with the JNDI name but in a production system you probably want to use JNDI so that you
-        can change it without having to rebuild the application.</p>
-        <p>The next step is to tell your application server what value to give that JNDI name. This depends on your application server. For Tomcat you
-        can just edit it into your <courier>context.xml</courier> file like this:</p>
-		<code><![CDATA[
-<Environment name="BundlesDir" value="MY_DIRECTORY/bundles" type="java.lang.String" override="true"/>
-		]]></code>
+        The only difference between the two is that this one has the directory property set from an environment variable which you can
+        supply from a properties file or define it on the JVM launcher.</p>
         <p>Finally you want to actually add some bundles to that directory. There are four bundle projects you can use right away, these are the
         ones in the demo:</p>
         <list>
@@ -261,6 +253,9 @@ public PermissionManager getPermissionManager() {
 			<tw>12cm</tw>
 		<tr>
 			<td>3.2.2</td>
+		</tr>
+		<tr>
+			<td>Removed references to JNDI.</td>
 		</tr>
 		<tr>
 			<td>Updated dependencies.</td>
