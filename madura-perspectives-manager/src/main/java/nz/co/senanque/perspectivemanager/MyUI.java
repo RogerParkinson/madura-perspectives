@@ -7,9 +7,12 @@ import java.util.List;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 
+import nz.co.senanque.login.PermissionResolverSpringSecurity;
 import nz.co.senanque.madura.bundle.BundleExport;
 import nz.co.senanque.madura.bundle.BundleManager;
 import nz.co.senanque.madura.bundle.spring.BundledInterfaceRegistrar;
+import nz.co.senanque.permissionmanager.PermissionManager;
+import nz.co.senanque.permissionmanager.PermissionManagerImpl;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
 import nz.co.senanque.perspectiveslibrary.BundleListenerImpl;
@@ -17,8 +20,6 @@ import nz.co.senanque.perspectiveslibrary.MenuCloner;
 import nz.co.senanque.perspectiveslibrary.SubApplication;
 import nz.co.senanque.vaadin.Hints;
 import nz.co.senanque.vaadin.HintsImpl;
-import nz.co.senanque.vaadin.permissionmanager.PermissionManager;
-import nz.co.senanque.vaadin.permissionmanager.PermissionManagerImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -36,11 +37,13 @@ import org.springframework.web.context.ContextLoaderListener;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
+import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.EnableVaadin;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.server.SpringVaadinServlet;
@@ -86,7 +89,8 @@ public class MyUI extends UI implements MessageSourceAware {
 	private List<MenuBar.MenuItem> m_added = new ArrayList<MenuBar.MenuItem>();
 	private MessageSource m_messageSource;
 
-    @WebServlet(name = "MyUIServlet", urlPatterns = "/*", asyncSupported = true)
+    @WebServlet(name = "MyUIServlet", urlPatterns = {"/app/*", "/VAADIN/*"}, asyncSupported = true)
+    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends SpringVaadinServlet {
 
 		private static final long serialVersionUID = 1L;
@@ -129,7 +133,8 @@ public class MyUI extends UI implements MessageSourceAware {
     	@Scope(value="vaadin-ui", proxyMode = ScopedProxyMode.TARGET_CLASS)
     	@BundleExport
     	public PermissionManager getPermissionManager() {
-    		PermissionManagerImpl ret = new PermissionManagerImpl();
+    		PermissionManagerImpl ret =  new PermissionManagerImpl();
+    		ret.setPermissionResolver(new PermissionResolverSpringSecurity());
     		return ret;
     	}
     	
@@ -164,7 +169,10 @@ public class MyUI extends UI implements MessageSourceAware {
 						.getSubApplicationValues()) {
 					m_bundleManager.releaseBundle(subApplication.getBundleVersion());
 				}
-				m_permissionManager.close(getUI());
+		    	VaadinService.getCurrentRequest().getWrappedSession().invalidate();
+		    	getUI().close();
+		        String contextPath = VaadinService.getCurrentRequest().getContextPath();
+		        getUI().getPage().setLocation(contextPath);
 			}
 			});
 
