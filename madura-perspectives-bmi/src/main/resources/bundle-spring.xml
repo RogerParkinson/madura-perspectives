@@ -22,7 +22,7 @@ limitations under the License.
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
 	>
 
-	<context:component-scan base-package="nz.co.senanque.bmi,nz.co.senanque.pizzaorder.rules,nz.co.senanque.vaadin,nz.co.senanque.vaadin.directed,nz.co.senanque.validationengine,nz.co.senanque.rules"/>
+	<context:component-scan base-package="nz.co.senanque.pizzaorder.rules,nz.co.senanque.vaadin,nz.co.senanque.vaadin.directed,nz.co.senanque.validationengine,nz.co.senanque.rules"/>
 	<context:annotation-config/>
 	
 	<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">

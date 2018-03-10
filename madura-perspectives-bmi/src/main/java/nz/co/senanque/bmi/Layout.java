@@ -15,11 +15,16 @@
  *******************************************************************************/
 package nz.co.senanque.bmi;
 
+import java.util.Locale;
+
 import nz.co.senanque.perspectiveslibrary.Blackboard;
 import nz.co.senanque.pizzaorder.instances.Customer;
 import nz.co.senanque.vaadin.MaduraFieldGroup;
 import nz.co.senanque.vaadin.MaduraSessionManager;
 import nz.co.senanque.vaadin.directed.OneFieldWindowFactory;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -79,6 +84,9 @@ public class Layout extends VerticalLayout {
 		setHeight("100.0%");
 		
 		// m_name
+		Locale locale = LocaleContextHolder.getLocale();
+		MessageSource messageSource = getMaduraSessionManager().getMessageSource();
+		String s = messageSource.getMessage("bmi.button", null, locale);
 		Button bmiButton = m_maduraFieldGroup.createButton("bmi.button", new ClickListener(){
 
 			private static final long serialVersionUID = 1L;

@@ -18,7 +18,10 @@ package nz.co.senanque.bundle1;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.AppFactory;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
-import nz.co.senanque.vaadin.MaduraFieldGroup;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.support.MessageSourceAccessor;
 
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
@@ -30,9 +33,11 @@ import com.vaadin.ui.MenuBar.MenuItem;
  * @author Roger Parkinson
  *
  */
-public class AppFactoryImpl implements AppFactory {
+public class AppFactoryImpl implements AppFactory, MessageSourceAware {
 	
 	
+	private MessageSource m_messageSource;
+
 	/* (non-Javadoc)
 	 * @see nz.co.senanque.bundle1.AppFactory#createApp()
 	 */
@@ -40,13 +45,14 @@ public class AppFactoryImpl implements AppFactory {
 	public App createApp(Blackboard blackboard)
 	{
 		App ret = new App();
-		final Layout layout = new Layout();
+		final MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(m_messageSource);
+		final Layout layout = new Layout(messageSourceAccessor);
 		layout.setBlackboard(blackboard);
 		ret.setComponentContainer(layout);
 
 		MenuBar menuBar = new MenuBar();
-		final MenuBar.MenuItem file = menuBar.addItem("File", null);
-		file.addItem("Close", new Command(){
+		final MenuBar.MenuItem file = menuBar.addItem(messageSourceAccessor.getMessage("file"), null);
+		file.addItem(messageSourceAccessor.getMessage("close"), new Command(){
 
 			private static final long serialVersionUID = -1L;
 
@@ -54,8 +60,8 @@ public class AppFactoryImpl implements AppFactory {
 				layout.close();
 				
 			}});
-		final MenuBar.MenuItem save = menuBar.addItem("Edit", null);
-		save.addItem("Save", new Command(){
+		final MenuBar.MenuItem save = menuBar.addItem(messageSourceAccessor.getMessage("edit"), null);
+		save.addItem(messageSourceAccessor.getMessage("save"), new Command(){
 
 			private static final long serialVersionUID = -1L;
 
@@ -66,5 +72,11 @@ public class AppFactoryImpl implements AppFactory {
 		
 		ret.setMenuBar(menuBar);
 		return ret;
+	}
+
+	@Override
+	public void setMessageSource(MessageSource messageSource) {
+		m_messageSource = messageSource;
+		
 	}
 }

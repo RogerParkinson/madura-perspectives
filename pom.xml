@@ -22,7 +22,7 @@
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<jetty.plugin.version>9.2.3.v20140905</jetty.plugin.version>
 		<slf4j.version>1.7.12</slf4j.version>
-		<madura.vaadin.version>3.2.3</madura.vaadin.version>
+		<madura.vaadin.version>3.2.5</madura.vaadin.version>
    		<timestamp>${maven.build.timestamp}</timestamp>
    		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
 	</properties>
@@ -84,13 +84,18 @@
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
+				<artifactId>madura-springsecurity-login</artifactId>
+				<version>${madura.vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin</artifactId>
-	            <version>3.2.3</version>
+	            <version>${madura.vaadin.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-vaadin-directed</artifactId>
-				<version>3.2.3</version>
+				<version>${madura.vaadin.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
