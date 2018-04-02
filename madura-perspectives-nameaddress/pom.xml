@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>nz.co.senanque</groupId>
 		<artifactId>madura-perspectives</artifactId>
-		<version>3.2.3-SNAPSHOT</version>
+		<version>3.3.0</version>
 	</parent>
 	<artifactId>madura-perspectives-nameaddress</artifactId>
 	<url>www.madurasoftware.com</url>
