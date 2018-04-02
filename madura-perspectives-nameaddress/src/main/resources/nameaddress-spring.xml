@@ -21,7 +21,7 @@ limitations under the License.
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
-	<bean id="PropertySourcesPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
+ 	<bean id="PropertySourcesPlaceholderConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
 
 	<bean id="bundleName" class="nz.co.senanque.madura.bundle.StringWrapperImpl">
 		<constructor-arg value="${bundle.name}"/>
@@ -33,14 +33,14 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 		<property name="appFactory">
 			<bean class="nz.co.senanque.bundle1.AppFactoryImpl"/>
 		</property>
-		<property name="messageSource">
-			<bean class="org.springframework.context.support.ResourceBundleMessageSource">
-				<property name="basenames">
-					<list>
-						<value>messages</value>
-					</list>
-				</property>
-			</bean>
+		<property name="messageSource" ref="messageSource"/>
+	</bean>
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
 		</property>
 	</bean>
+
 </beans>

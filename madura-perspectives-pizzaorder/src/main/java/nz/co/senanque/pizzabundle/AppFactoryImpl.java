@@ -15,6 +15,8 @@
  *******************************************************************************/
 package nz.co.senanque.pizzabundle;
 
+import java.util.Locale;
+
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.AppFactory;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
@@ -30,6 +32,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.MessageSourceAccessor;
 
 import com.vaadin.ui.Button.ClickEvent;
@@ -56,6 +59,7 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSour
 	public App createApp(Blackboard blackboard)
 	{
 		// Explicitly fetch this bean to ensure it is not instantiated until the session has started.
+		Locale locale = LocaleContextHolder.getLocale();
 		m_maduraSessionManager = m_beanFactory.getBean("maduraSessionManager",MaduraSessionManager.class);
 		App ret = new App();
 		MaduraFieldGroup fieldGroup = getMaduraSessionManager().createMaduraFieldGroup();

@@ -115,6 +115,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="weight" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>
@@ -147,6 +148,7 @@
 					<xsd:appinfo>
 						<annox:annotate>
 							<md:Label labelName="height" />
+							<md:Digits integerDigits="8" fractionalDigits="2" />
 							<md:Unknown/>
 						</annox:annotate>
 					</xsd:appinfo>

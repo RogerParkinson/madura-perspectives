@@ -15,6 +15,8 @@
  *******************************************************************************/
 package nz.co.senanque.bmi;
 
+import java.util.Locale;
+
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.AppFactory;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
@@ -27,15 +29,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.MessageSourceAccessor;
 
 /**
  * @author Roger Parkinson
  *
  */
-public class AppFactoryImpl implements AppFactory, BeanFactoryAware {
+public class AppFactoryImpl implements AppFactory, BeanFactoryAware, MessageSourceAware {
 	
 	protected transient Logger log = LoggerFactory.getLogger(this.getClass());
 
+	private MessageSource m_messageSource;
 	private MaduraSessionManager m_maduraSessionManager;
 	private BeanFactory m_beanFactory;
 
@@ -45,6 +52,7 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware {
 	public App createApp(Blackboard blackboard)
 	{
 		// Explicitly fetch this bean to ensure it is not instantiated until the session has started.
+		Locale locale = LocaleContextHolder.getLocale();
 		m_maduraSessionManager = m_beanFactory.getBean("maduraSessionManager",MaduraSessionManager.class);
 		OneFieldWindowFactory oneFieldWindowFactory = m_beanFactory.getBean(OneFieldWindowFactory.class);
 		App ret = new App();
@@ -65,6 +73,9 @@ public class AppFactoryImpl implements AppFactory, BeanFactoryAware {
 
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		m_beanFactory = beanFactory;
+	}
+	public void setMessageSource(MessageSource messageSource) {
+		m_messageSource = messageSource;
 	}
 
 }

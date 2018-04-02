@@ -30,6 +30,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>nz.co.senanque</groupId>
+			<artifactId>madura-vaadin-directed</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 		    <groupId>org.hibernate.javax.persistence</groupId>
 		    <artifactId>hibernate-jpa-2.1-api</artifactId>
 		    <version>1.0.0.Final</version>
@@ -253,4 +258,38 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.3</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

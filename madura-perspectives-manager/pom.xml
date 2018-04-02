@@ -58,6 +58,22 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>nz.co.senanque</groupId>
+			<artifactId>madura-springsecurity-login</artifactId>
+		</dependency>
+<!-- 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.0.RELEASE</version>
+		</dependency>
+ -->
 	</dependencies>
 	<build>
 		<defaultGoal>package</defaultGoal>
@@ -71,7 +87,7 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 			<plugin>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>maduradocs</artifactId>
-				<version>6.2.1</version>
+				<version>6.3.2</version>
 				<executions>
 					<execution>
 						<goals>
@@ -79,6 +95,9 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<subprojectDir>madura-perspectives-manager</subprojectDir>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -135,12 +154,6 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 			        </goals>
 			      </execution>
 			    </executions>
-			</plugin>
-			<!-- The Jetty plugin allows us to easily test the development build by
-				running jetty:run on the command line. -->
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -204,4 +217,38 @@ construct a semi-dynamic workspace with plugged in apps that share a common look
 			</plugins>
 		</pluginManagement>
 	</build>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.3</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
