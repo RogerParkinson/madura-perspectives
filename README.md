@@ -1,5 +1,9 @@
-Madura Perspectives
+madura-perspectives
 ===================
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/nz.co.senanque/madura-perspectives/badge.svg)](http://mvnrepository.com/artifact/nz.co.senanque/madura-perspectives)
+
+[![build_status](https://travis-ci.org/RogerParkinson/madura-perspectives.svg?branch=master)](https://travis-ci.org/RogerParkinson/madura-perspectives)
 
 More detailed documentation can be found at [Madura Perspectives](http://www.madurasoftware.com/madura-perspectives-manager.pdf)
 
@@ -10,7 +14,7 @@ Sub-applications can be added dynamically while the application is running. They
 The framework s easily customisable using Vaadin's facilities (CSS etc). The CSS definitions are, of course, shared across
 all of the sub-applications so you get a consistent look and feel.
 
-If you want to try this out quickly there is an [on line demo](http://demos-madura.rhcloud.com/madura-perspectives-manager/)
+If you want to try this out quickly there is an [on line demo](http://madurasoftware.com/?page_id=43), scroll down to the demos and pick *Madura Perspectives* Online.
 
 Build this using maven clean package. You will find the following sub projects:
 
@@ -21,9 +25,9 @@ This holds the code common to the perspectives manager and the sub-applications.
 
 madura-perspectives-manager
 --
-This delivers a war file that can accept sub-applications. The default is to add them to the WEB-INF/bundles directory, which at first glance makes the whole dynamic sub-applications seem a bit pointless since they are embedded in the war file. But this is a good way to set up a demo because it saves you having to configure it. See the docs for details on configuration, but you don't need to configure it to see the demo. The docs are in the pdf file in the target directory (after you've run the build).
+This delivers a war file that can accept bundled sub-applications. The default is to add them to the WEB-INF/bundles directory, which at first glance makes the whole dynamic sub-applications seem a bit pointless since they are embedded in the war file. But this is a good way to set up a demo because it saves you having to configure it. See the docs for details on configuration, but you don't need to configure it to see the demo. The docs are in the pdf file in the target directory (after you've run the build).
 
-We have tested the war file under Tomcat 7 but it should run on any JEE server.
+We have tested the war file under Tomcat 8 but it should run on any JEE server.
 
 Because it is a demo we have avoided the need to use a database etc.
 
@@ -39,7 +43,7 @@ madura-perspectives-pizzaorder
 --
 This is much more complex in that it implements the Pizza Order demo from [Madura Rules Demo](https://github.com/RogerParkinson/madura-vaadin-support/tree/master/madura-rules-demo). This is a rules-driven pizza configuration which lets you pick different pizza bases, toppings and sizes, except that only some combinations are allowed and the rules enforce this. The rules, UI and underlying domain objects are all delivered by the sub-application.
 
-It also contributes two entries to the main menu: Save and Cancel, and the Save option disables if there is a required field that has not been filled in.
+It also contributes two entries to the main menu: Save and Cancel, and the Save option disables if there is a required field that has not been filled in. So this shows the menu can dynamically change according to the bundle selected.
 
 madura-perspectives-bmi
 --

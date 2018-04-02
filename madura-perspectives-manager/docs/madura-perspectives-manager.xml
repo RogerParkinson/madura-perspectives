@@ -14,7 +14,7 @@
 			<reference t="Vaadin" url="http://vaadin.com/home" />
 			<reference t="Spring Framework" url="http://www.springframework.org" />
 			<reference t="madura-perspectives" url="https://github.com/RogerParkinson/madura-perspectives"/>
-			<reference t="madura-perspectives-online" url="http://demos-madura.rhcloud.com/madura-perspectives-manager/"/>
+			<reference t="madura-perspectives-online" url="http://madurasoftware.com/?page_id=43"/>
 			
 		</references>
 	</title>
@@ -53,10 +53,10 @@
 		</h1>
         <h1 t="Running the Demo">
         <p>There is an on-line demo of the project here: <referenceLink t="madura-perspectives-online"/>. If you use that you can skip building it and
-        running it locally.</p>
-		<p>The first thing you need to do is check out the project from <referenceLink t="madura-perspectives"/>.</p>
-		<p>To build use: mvn install</p>
-		<p>To run with Jetty use: mvn jetty:run and open http://localhost:8080/. You can also run them with Eclipse WTP. We tested with Tomcat 7.</p>
+        running it locally, but do understand that in the on-line demo the pluggable applications are fixed and you cannot switch them in and out and add your own.</p>
+		<p>To build your own version the first thing you need to do is check out the project from <referenceLink t="madura-perspectives"/>, then build
+		with <courier>mvn install</courier> and deploy the resulting war file to your favourite servlet engine. We mostly test with Eclipse WTP and Tomcat 8.</p>
+		<p>Once you have it running browse to <courier>http://localhost:8080/madura-perspectives-manager</courier>.</p>
 		<p>To login the user/password is always admin/admin, you can also use user/user</p>
 
 		<p>For the purposes of keeping the demo setup simple the bundles it uses are embedded in the war file, that means you don't have
@@ -252,7 +252,13 @@ public PermissionManager getPermissionManager() {
 		<table width="12cm">
 			<tw>12cm</tw>
 		<tr>
-			<td>3.2.2</td>
+			<td>3.3.0</td>
+		</tr>
+		<tr>
+			<td>Travis build.</td>
+		</tr>
+		<tr>
+			<td>Documentation updates.</td>
 		</tr>
 		<tr>
 			<td>Removed references to JNDI.</td>
