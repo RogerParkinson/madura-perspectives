@@ -21,7 +21,7 @@
 		<vaadin.version>7.7.3</vaadin.version>
 		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 		<slf4j.version>1.7.12</slf4j.version>
-		<madura.vaadin.version>3.3.0</madura.vaadin.version>
+		<madura.vaadin.version>3.4.0</madura.vaadin.version>
    		<timestamp>${maven.build.timestamp}</timestamp>
    		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
 	</properties>
@@ -84,6 +84,11 @@
 			<dependency>
 				<groupId>nz.co.senanque</groupId>
 				<artifactId>madura-springsecurity-login</artifactId>
+				<version>${madura.vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>nz.co.senanque</groupId>
+				<artifactId>madura-oauth2-login</artifactId>
 				<version>${madura.vaadin.version}</version>
 			</dependency>
 			<dependency>

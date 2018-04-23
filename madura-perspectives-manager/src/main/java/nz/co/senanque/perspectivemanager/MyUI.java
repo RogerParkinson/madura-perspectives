@@ -7,12 +7,12 @@ import java.util.List;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.annotation.WebServlet;
 
-import nz.co.senanque.login.PermissionResolverSpringSecurity;
 import nz.co.senanque.madura.bundle.BundleExport;
 import nz.co.senanque.madura.bundle.BundleManager;
 import nz.co.senanque.madura.bundle.spring.BundledInterfaceRegistrar;
 import nz.co.senanque.permissionmanager.PermissionManager;
 import nz.co.senanque.permissionmanager.PermissionManagerImpl;
+import nz.co.senanque.permissionmanager.PermissionResolver;
 import nz.co.senanque.perspectiveslibrary.App;
 import nz.co.senanque.perspectiveslibrary.Blackboard;
 import nz.co.senanque.perspectiveslibrary.BundleListenerImpl;
@@ -113,6 +113,7 @@ public class MyUI extends UI implements MessageSourceAware {
     public static class MyConfiguration {
     	
     	@Autowired MessageSource messageSource;
+    	@Autowired PermissionResolver permissionResolver;
     	
     	public MyConfiguration() {
     		m_logger.info("MyConfiguration"); // this gets called at application startup, not session startup so this is an app bean.
@@ -134,7 +135,7 @@ public class MyUI extends UI implements MessageSourceAware {
     	@BundleExport
     	public PermissionManager getPermissionManager() {
     		PermissionManagerImpl ret =  new PermissionManagerImpl();
-    		ret.setPermissionResolver(new PermissionResolverSpringSecurity());
+    		ret.setPermissionResolver(permissionResolver);
     		return ret;
     	}
     	
