@@ -135,7 +135,10 @@
         </list>
         <p>These are all maven sub-projects and they are automatically added to the <courier>WEB-INF/bundles</courier> in the madura-perspectives-manager project. You
         can configure a sweep directory as described above and deploy your own bundle(s) to that. As long as you keep changing your bundle's version you can change, build 
-        and deploy it without restarting the main application, though you do have to log out and back in to see the new bundle you added.</p> 
+        and deploy it without restarting the main application, though you do have to log out and back in to see the new bundle you added.</p>
+        <p>A production-ready version of this would need a better authentication mechanism. The current one is designed for demos. You
+        should consider switching the madura-springsecurity-login dependency for madura-oauth2-login and adding the appropriate configuration. This will also require
+        a separate authentication server which you may already have.</p> 
         </h1>
         <h1 t="What Does a Sub Application look like?">
         <p>A sub application is a jar file, more specifically it is a Madura Bundle<referenceLink t="MaduraBundles"/> which means it has some specific items in the jar file.
@@ -251,6 +254,12 @@ public PermissionManager getPermissionManager() {
 		<a1 t="Release Notes">
 		<table width="12cm">
 			<tw>12cm</tw>
+		<tr>
+			<td>3.4.0</td>
+		</tr>
+		<tr>
+			<td>Align with updated Madura Vaadin Support.</td>
+		</tr>
 		<tr>
 			<td>3.3.0</td>
 		</tr>
